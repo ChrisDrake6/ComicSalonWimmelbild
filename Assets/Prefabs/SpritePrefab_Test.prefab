@@ -243,7 +243,7 @@ MonoBehaviour:
   minIdleTime: 5
   maxIdleTime: 12
   roamingRadius: 5
-  walkingTimeOut: 25
+  walkingTimeOut: 15
 --- !u!195 &1966415579691217382
 NavMeshAgent:
   m_ObjectHideFlags: 0

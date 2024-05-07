@@ -20,6 +20,11 @@ public class SpriteRoamingState : SpriteBaseState
 
     public override void EnterState(SpriteStateManager sprite)
     {
+        if (sprite.debugStatusDisplay.enabled)
+        {
+            sprite.debugStatusDisplay.color = Color.yellow;
+        }
+
         if (agent.isStopped)
         {
             agent.isStopped = false;

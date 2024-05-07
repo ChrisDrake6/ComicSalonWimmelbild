@@ -5,6 +5,8 @@ using System.IO;
 
 public class SpawnManager : MonoBehaviour
 {
+    [SerializeField] bool debugModeOn;
+
     [SerializeField] GameObject[] spawnPoints;
     [SerializeField] string filePath;
     [SerializeField] GameObject spritePrefab;
@@ -18,6 +20,13 @@ public class SpawnManager : MonoBehaviour
     List<SpriteDataContainer> waitingRoom = new List<SpriteDataContainer>();
     List<SpriteDataContainer> registeredSprites = new List<SpriteDataContainer>();
     int spawnPointCycleTick = 0;
+
+    public static SpawnManager Instance { get; private set; }
+
+    public SpawnManager()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -86,5 +95,10 @@ public class SpawnManager : MonoBehaviour
             }
         }
         waitingRoom = newFiles.Where(newFile => !registeredSprites.Any(rS => rS.PathToDirectory == newFile.PathToDirectory)).ToList();
+    }
+
+    public bool DebugModeOn()
+    {
+        return debugModeOn;
     }
 }

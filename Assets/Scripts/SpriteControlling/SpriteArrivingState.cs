@@ -19,6 +19,11 @@ public class SpriteArrivingState : SpriteBaseState
 
     public override void EnterState(SpriteStateManager sprite)
     {
+        if (sprite.debugStatusDisplay.enabled)
+        {
+            sprite.debugStatusDisplay.color = Color.blue;
+        }
+
         currentTimeOut = Time.time +timeOut;
         animator.SetBool("IsWalking", true);
         Vector3 randomPoint = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f ), 10);

@@ -3,6 +3,8 @@ using UnityEngine.AI;
 
 public class SpriteStateManager : MonoBehaviour
 {
+    public SpriteRenderer debugStatusDisplay;
+
     [SerializeField] float minIdleTime;
     [SerializeField] float maxIdleTime;
 
@@ -21,6 +23,8 @@ public class SpriteStateManager : MonoBehaviour
 
     void Start()
     {
+        debugStatusDisplay.enabled = SpawnManager.Instance.DebugModeOn() ? true : false;
+
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;

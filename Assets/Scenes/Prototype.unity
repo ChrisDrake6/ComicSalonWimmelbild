@@ -821,6 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc33dc0ee6fe964786a98ff9237078d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugModeOn: 1
   spawnPoints:
   - {fileID: 1647156508}
   - {fileID: 841312685}

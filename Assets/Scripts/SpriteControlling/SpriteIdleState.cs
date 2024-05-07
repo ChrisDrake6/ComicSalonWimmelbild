@@ -17,6 +17,11 @@ public class SpriteIdleState : SpriteBaseState
 
     public override void EnterState(SpriteStateManager sprite)
     {
+        if(sprite.debugStatusDisplay.enabled)
+        {
+            sprite.debugStatusDisplay.color = Color.green;
+        }
+
         animator.SetBool("IsWalking", false);
         float randomIdleTime = Random.Range(minIdleTime, maxIdleTime);
         nextRoamingTime = randomIdleTime + Time.time;

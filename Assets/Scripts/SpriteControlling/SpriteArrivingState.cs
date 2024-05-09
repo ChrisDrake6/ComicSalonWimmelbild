@@ -1,4 +1,3 @@
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,12 +18,7 @@ public class SpriteArrivingState : SpriteBaseState
 
     public override void EnterState(SpriteStateManager sprite)
     {
-        if (sprite.debugStatusDisplay.enabled)
-        {
-            sprite.debugStatusDisplay.color = Color.blue;
-        }
-
-        currentTimeOut = Time.time +timeOut;
+        currentTimeOut = Time.time + timeOut + 10;
         animator.SetBool("IsWalking", true);
         Vector3 randomPoint = new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f ), 10);
         Vector3 randomDirection = Camera.main.ViewportToWorldPoint(randomPoint);
@@ -48,5 +42,12 @@ public class SpriteArrivingState : SpriteBaseState
                 agent.isStopped = true;
             }
         }
+    }
+
+    public override void OnDrawGizmos(SpriteStateManager sprite)
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(new Vector3(sprite.transform.position.x, sprite.transform.position.y + 0.75F, 0), 0.1F);
+        Debug.DrawLine(sprite.transform.position, initialDestination, Color.blue);
     }
 }

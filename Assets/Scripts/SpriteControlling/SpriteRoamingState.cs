@@ -19,12 +19,7 @@ public class SpriteRoamingState : SpriteBaseState
     }
 
     public override void EnterState(SpriteStateManager sprite)
-    {
-        if (sprite.debugStatusDisplay.enabled)
-        {
-            sprite.debugStatusDisplay.color = Color.yellow;
-        }
-
+    {       
         if (agent.isStopped)
         {
             agent.isStopped = false;
@@ -50,5 +45,12 @@ public class SpriteRoamingState : SpriteBaseState
                 agent.isStopped = true;
             }
         }
+    }
+
+    public override void OnDrawGizmos(SpriteStateManager sprite)
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(new Vector3(sprite.transform.position.x, sprite.transform.position.y + 0.75F, 0), 0.1F);
+        Debug.DrawLine(sprite.transform.position, currentDestination, Color.blue);
     }
 }

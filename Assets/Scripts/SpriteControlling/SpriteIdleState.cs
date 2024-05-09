@@ -16,12 +16,7 @@ public class SpriteIdleState : SpriteBaseState
     }
 
     public override void EnterState(SpriteStateManager sprite)
-    {
-        if(sprite.debugStatusDisplay.enabled)
-        {
-            sprite.debugStatusDisplay.color = Color.green;
-        }
-
+    {      
         animator.SetBool("IsWalking", false);
         float randomIdleTime = Random.Range(minIdleTime, maxIdleTime);
         nextRoamingTime = randomIdleTime + Time.time;
@@ -33,5 +28,11 @@ public class SpriteIdleState : SpriteBaseState
         {
             sprite.SwitchState(sprite.roamingState);
         }
+    }
+
+    public override void OnDrawGizmos(SpriteStateManager sprite)
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(new Vector3(sprite.transform.position.x, sprite.transform.position.y + 0.75F, 0), 0.1F);
     }
 }

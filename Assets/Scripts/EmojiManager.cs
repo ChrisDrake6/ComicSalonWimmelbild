@@ -23,13 +23,17 @@ public class EmojiManager : MonoBehaviour
 
     void Update()
     {
-        possibleCandidates = SpawnManager.Instance.registeredSprites.Select(a => a.AssignedPrefab.GetComponent<SpriteStateManager>()).Where(a => !a.EmojiContainer.gameObject.activeInHierarchy).ToArray();
-        if (Time.time >= nextBubblesTime && possibleCandidates.Count() >= amountOfSimultanousBubbles) 
+        possibleCandidates = SpawnManager.Instance.registeredSprites
+            .Where(a => a.AssignedPrefab != null)
+            .Select(a => a.AssignedPrefab.GetComponent<SpriteStateManager>())
+            .Where(a => !a.EmojiContainer.gameObject.activeInHierarchy)
+            .ToArray();
+        if (Time.time >= nextBubblesTime && possibleCandidates.Count() >= amountOfSimultanousBubbles)
         {
-            for(int i = 0; i < amountOfSimultanousBubbles; i++)
+            for (int i = 0; i < amountOfSimultanousBubbles; i++)
             {
                 SpriteStateManager sprite = possibleCandidates[Random.Range(0, possibleCandidates.Length)];
-                if(sprite != null)
+                if (sprite != null)
                 {
                     sprite.SpeechBubble.gameObject.SetActive(true);
                     sprite.EmojiContainer.sprite = emojies[Random.Range(0, emojies.Length)];

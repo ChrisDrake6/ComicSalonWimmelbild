@@ -9,13 +9,15 @@ public class SpriteRoamingState : SpriteBaseState
     Animator animator;
     float timeOut;
     float currentTimeOut;
+    float arrivalLeeway;
 
-    public SpriteRoamingState(float roamingRadius, NavMeshAgent agent, Animator animator, float timeOut)
+    public SpriteRoamingState(float roamingRadius, NavMeshAgent agent, Animator animator, float timeOut, float arrivalLeeway)
     {
         this.roamingRadius = roamingRadius;
         this.agent = agent;
         this.animator = animator;
         this.timeOut = timeOut;
+        this.arrivalLeeway = arrivalLeeway;
     }
 
     public override void EnterState(SpriteStateManager sprite)
@@ -37,7 +39,7 @@ public class SpriteRoamingState : SpriteBaseState
 
     public override void UpdateState(SpriteStateManager sprite)
     {
-        if (sprite.transform.position == currentDestination || Time.time >= currentTimeOut)
+        if (Vector3.Distance(sprite.transform.position, currentDestination) <= arrivalLeeway || Time.time >= currentTimeOut)
         {
             sprite.SwitchState(sprite.idleState);
             if (Time.time >= currentTimeOut)

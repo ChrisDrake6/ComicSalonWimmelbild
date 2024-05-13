@@ -5,7 +5,8 @@ using System.IO;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] spawnPoints;
+    public GameObject[] spawnPoints;
+    public List<SpriteDataContainer> registeredSprites = new List<SpriteDataContainer>();
     [SerializeField] string filePath;
     [SerializeField] GameObject spritePrefab;
     [SerializeField] float refreshInterval;
@@ -16,8 +17,14 @@ public class SpawnManager : MonoBehaviour
     float nextRefreshTime;
     float nextSpawnTime;
     List<SpriteDataContainer> waitingRoom = new List<SpriteDataContainer>();
-    List<SpriteDataContainer> registeredSprites = new List<SpriteDataContainer>();
     int spawnPointCycleTick = 0;
+
+    public static SpawnManager Instance { get; private set; }
+
+    public SpawnManager()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -53,7 +60,8 @@ public class SpawnManager : MonoBehaviour
                 bodyContainer.GetComponent<SpriteRenderer>().sprite = nextSprite.BodySprite;
                 headContainer.GetComponent<SpriteRenderer>().sprite = nextSprite.HeadSprite;
 
-                newPrefab.transform.localScale /= scaleFactor; 
+                newPrefab.transform.localScale /= scaleFactor;
+                newPrefab.GetComponent<SpriteStateManager>().data = nextSprite;
 
                 waitingRoom.Remove(nextSprite);
                 nextSprite.AssignedPrefab = newPrefab;

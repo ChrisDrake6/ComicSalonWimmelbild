@@ -13,6 +13,8 @@ public class GroupManager : MonoBehaviour
         Instance = this;
     }
 
+
+
     public void FormGroup(SpriteStateManager sprite)
     {
         SpriteStateManager chosenPartner = LinkLine.Instance.SelectedSprite;
@@ -28,6 +30,7 @@ public class GroupManager : MonoBehaviour
             currentGroup.Members.Add(sprite);
         }
         sprite.isInGroup = true;
+        currentGroup.timesAskedForDestination = 0;
         foreach(SpriteStateManager member in currentGroup.Members)
         {
             member.SwitchState(member.roamingState);
@@ -62,11 +65,12 @@ public class GroupManager : MonoBehaviour
     {
         GroupData currentgroup = groups.First(group => group.Members.Any(member => member == sprite));
 
-        currentgroup.timesAskedForDestination++;
-        if (currentgroup.timesAskedForDestination > currentgroup.Members.Count)
+        if (currentgroup.timesAskedForDestination >= currentgroup.Members.Count || currentgroup.timesAskedForDestination == 0)
         {
             currentgroup.CurrentDestination = Random.insideUnitSphere * roamingRadius;
+            currentgroup.timesAskedForDestination = 0;
         }
+        currentgroup.timesAskedForDestination++;
         return currentgroup.CurrentDestination;
     }
 

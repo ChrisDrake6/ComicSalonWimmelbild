@@ -81,11 +81,16 @@ public class SpriteStateManager : MonoBehaviour
         if (LinkLine.Instance.IsActive())
         {
             LinkLine.Instance.SelectedSprite = this;
+            hoverOverIndicator.SetActive(true);
         }
     }
 
     private void OnMouseExit()
     {
+        if (LinkLine.Instance.SelectedSprite == this)
+        {
+            LinkLine.Instance.SelectedSprite = null;
+        }
         hoverOverIndicator.SetActive(false);
     }
 

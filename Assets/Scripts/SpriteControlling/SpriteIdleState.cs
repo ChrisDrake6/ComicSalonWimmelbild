@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SpriteIdleState : SpriteBaseState
 {
-    float minIdleTime; 
+    float minIdleTime;
     float maxIdleTime;
     Animator animator;
 
@@ -16,10 +16,17 @@ public class SpriteIdleState : SpriteBaseState
     }
 
     public override void EnterState(SpriteStateManager sprite)
-    {      
+    {
         animator.SetBool("IsWalking", false);
-        float randomIdleTime = Random.Range(minIdleTime, maxIdleTime);
-        nextRoamingTime = randomIdleTime + Time.time;
+        if (sprite.isInGroup)
+        {
+            nextRoamingTime = GroupManager.Instance.GetGroupIdleDeadLine(sprite, minIdleTime, maxIdleTime);
+        }
+        else
+        {
+            float randomIdleTime = Random.Range(minIdleTime, maxIdleTime);
+            nextRoamingTime = randomIdleTime + Time.time;
+        }
     }
 
     public override void UpdateState(SpriteStateManager sprite)

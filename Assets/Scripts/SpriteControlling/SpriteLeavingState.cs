@@ -28,6 +28,11 @@ public class SpriteLeavingState : SpriteBaseState
         currentTimeOut = Time.time + timeOut;
         animator.SetBool("IsWalking", true);
 
+        if (sprite.isInGroup)
+        {
+            GroupManager.Instance.RemoveFromGroup(sprite);
+        }
+
         int areaMask = agent.areaMask;
         areaMask |= 1 << NavMesh.GetAreaFromName("Entrance");
         agent.areaMask = areaMask;

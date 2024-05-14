@@ -5,4 +5,5 @@ public class RadialMenuCakePiece : MonoBehaviour
 {
     public Image Icon;
     public Image CakePiece;
+    public PossibleActions Action;
 }

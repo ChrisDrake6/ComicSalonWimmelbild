@@ -21,7 +21,7 @@ public class SpriteRoamingState : SpriteBaseState
     }
 
     public override void EnterState(SpriteStateManager sprite)
-    {       
+    {
         if (agent.isStopped)
         {
             agent.isStopped = false;
@@ -29,11 +29,21 @@ public class SpriteRoamingState : SpriteBaseState
 
         currentTimeOut = Time.time + timeOut;
         animator.SetBool("IsWalking", true);
-        Vector3 randomDirection = Random.insideUnitSphere * roamingRadius;
-        randomDirection += sprite.transform.position;
-        NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, roamingRadius, 1);
-        currentDestination = hit.position;
+
+        Vector3 randomDirection = Vector3.zero;
+
+        if (sprite.isInGroup)
+        {
+            currentDestination = GroupManager.Instance.GetCurrentGroupDestination(sprite, roamingRadius);
+        }
+        else
+        {
+            randomDirection = Random.insideUnitSphere * roamingRadius;
+            randomDirection += sprite.transform.position;
+            NavMeshHit hit;
+            NavMesh.SamplePosition(randomDirection, out hit, roamingRadius, 1);
+            currentDestination = hit.position;
+        }
         agent.SetDestination(currentDestination);
     }
 

@@ -2,5 +2,7 @@ public enum PossibleActions
 {
     Export,
     Leave,
-    Cancel
+    Cancel,
+    Link,
+    Unlink
 }

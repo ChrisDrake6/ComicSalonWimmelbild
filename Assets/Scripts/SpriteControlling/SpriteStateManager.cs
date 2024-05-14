@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Rendering;
+using UnityEngine.U2D;
 
 public class SpriteStateManager : MonoBehaviour
 {
@@ -13,11 +13,15 @@ public class SpriteStateManager : MonoBehaviour
     [SerializeField] float shortDistanceTimeOut;
     [SerializeField] float longDistanceTimeOut;
 
+    [SerializeField] GameObject hoverOverIndicator;
+
     NavMeshAgent agent;
     Animator animator;
 
     public SpriteRenderer EmojiContainer;
     public GameObject SpeechBubble;
+
+    public bool isInGroup;
 
     SpriteBaseState currentState;
     public SpriteIdleState idleState;
@@ -59,22 +63,49 @@ public class SpriteStateManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnDrawGizmos()
-    {
-        currentState?.OnDrawGizmos(this);
-        //Gizmos.DrawWireSphere(transform.position, roamingRadius);
-    }
-
     private void OnMouseDown()
     {
         if (Time.timeScale != 0)
         {
             RadialMenuManager.Instance.OnSpriteClick(this);
+            hoverOverIndicator.SetActive(false);
         }
+    }
+
+    private void OnMouseEnter()
+    {
+        if (Time.timeScale != 0)
+        {
+            hoverOverIndicator.SetActive(true);
+        }
+        if (LinkLine.Instance.IsActive())
+        {
+            LinkLine.Instance.SelectedSprite = this;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        hoverOverIndicator.SetActive(false);
     }
 
     public void HideBubble()
     {
         SpeechBubble.gameObject.SetActive(false);
+    }
+
+    private void OnDrawGizmos()
+    {
+        currentState?.OnDrawGizmos(this);
+        if (isInGroup)
+        {
+            GroupData currentGroup = GroupManager.Instance.GetCurrentGroup(this);
+            foreach (SpriteStateManager member in currentGroup.Members)
+            {
+                Debug.DrawLine(transform.position, member.gameObject.transform.position, Color.green);
+            }
+        }
+
+        //Gizmos.DrawWireSphere(transform.position, roamingRadius);
     }
 }

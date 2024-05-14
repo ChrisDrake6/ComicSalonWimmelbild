@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 public class SpriteStateManager : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class SpriteStateManager : MonoBehaviour
     }
 
     void Update()
-    {        
+    {
         currentState?.UpdateState(this);
     }
 

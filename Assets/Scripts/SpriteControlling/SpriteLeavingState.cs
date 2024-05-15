@@ -4,26 +4,22 @@ using UnityEngine.AI;
 
 public class SpriteLeavingState : SpriteBaseState
 {
-    NavMeshAgent agent;
     Vector3 currentDestination;
     Animator animator;
     float timeOut;
     float currentTimeOut;
-    float arrivalLeeway;
 
-    public SpriteLeavingState(NavMeshAgent agent, Animator animator, float timeOut, float arrivalLeeway)
+    public SpriteLeavingState(Animator animator, float timeOut)
     {
-        this.agent = agent;
         this.animator = animator;
         this.timeOut = timeOut;
-        this.arrivalLeeway = arrivalLeeway;
     }
 
     public override void EnterState(SpriteStateManager sprite)
     {
-        if (agent.isStopped)
+        if (sprite.agent.isStopped)
         {
-            agent.isStopped = false;
+            sprite.agent.isStopped = false;
         }
         currentTimeOut = Time.time + timeOut;
         animator.SetBool("IsWalking", true);
@@ -33,19 +29,18 @@ public class SpriteLeavingState : SpriteBaseState
             GroupManager.Instance.RemoveFromGroup(sprite);
         }
 
-        int areaMask = agent.areaMask;
+        int areaMask = sprite.agent.areaMask;
         areaMask |= 1 << NavMesh.GetAreaFromName("Entrance");
-        agent.areaMask = areaMask;
-        agent.avoidancePriority = 0;
+        sprite.agent.areaMask = areaMask;
+        sprite.agent.avoidancePriority = 0;
 
-        GameObject closestSpawnPoint = SpawnManager.Instance.spawnPoints.OrderBy(a => Vector3.Distance(sprite.transform.position, a.transform.position)).First();
-        currentDestination = closestSpawnPoint.transform.position;
-        agent.SetDestination(currentDestination);
+        currentDestination = NavigationManager.Instance.GetClosestSpawnPosition(sprite.transform);
+        sprite.agent.SetDestination(currentDestination);
     }
 
     public override void UpdateState(SpriteStateManager sprite)
     {
-        if (Vector3.Distance(sprite.transform.position, currentDestination) <= arrivalLeeway || Time.time >= currentTimeOut)
+        if (sprite.agent.remainingDistance <= sprite.agent.stoppingDistance || Time.time >= currentTimeOut)
         {
             sprite.Despawn();
         }

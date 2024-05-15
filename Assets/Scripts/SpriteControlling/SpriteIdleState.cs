@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpriteIdleState : SpriteBaseState
 {
@@ -17,6 +18,8 @@ public class SpriteIdleState : SpriteBaseState
 
     public override void EnterState(SpriteStateManager sprite)
     {
+        sprite.agent.avoidancePriority = 99;
+
         animator.SetBool("IsWalking", false);
         if (sprite.isInGroup)
         {
@@ -31,6 +34,11 @@ public class SpriteIdleState : SpriteBaseState
 
     public override void UpdateState(SpriteStateManager sprite)
     {
+        if (sprite.agent.remainingDistance > sprite.agent.stoppingDistance)
+        {
+            sprite.roamingState.emergencySwitch = true;
+            sprite.SwitchState(sprite.roamingState);
+        }
         if (Time.time >= nextRoamingTime)
         {
             sprite.SwitchState(sprite.roamingState);

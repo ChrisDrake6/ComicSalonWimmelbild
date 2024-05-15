@@ -19,7 +19,6 @@ public class RadialMenuManager : MonoBehaviour
 
     public void OnSpriteClick(SpriteStateManager sprite)
     {
-        Debug.Log("Click");
         Time.timeScale = 0;
         currentTarget = sprite;
         radialMenu.gameObject.SetActive(true);

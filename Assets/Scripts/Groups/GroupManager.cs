@@ -18,64 +18,83 @@ public class GroupManager : MonoBehaviour
     public void FormGroup(SpriteStateManager sprite)
     {
         SpriteStateManager chosenPartner = LinkLine.Instance.SelectedSprite;
-        GroupData currentGroup = groups.FirstOrDefault(group => group.Members.Any(member => member == chosenPartner));
-        if (currentGroup == null)
+        if (chosenPartner != null)
         {
-            chosenPartner.isInGroup = true;
-            currentGroup = new GroupData(chosenPartner, sprite);
-            groups.Add(currentGroup);
-        }
-        else
-        {
-            currentGroup.Members.Add(sprite);
-        }
-        sprite.isInGroup = true;
-        currentGroup.timesAskedForDestination = 0;
-        foreach(SpriteStateManager member in currentGroup.Members)
-        {
-            member.SwitchState(member.roamingState);
+            GroupData currentGroup = groups.FirstOrDefault(group => group.Members.Any(member => member == chosenPartner));
+            if (currentGroup == null)
+            {
+                chosenPartner.isInGroup = true;
+                currentGroup = new GroupData(chosenPartner, sprite);
+                groups.Add(currentGroup);
+            }
+            else
+            {
+                currentGroup.Members.Add(sprite);
+            }
+            sprite.isInGroup = true;
+            currentGroup.timesAskedForDestination = 0;
+            foreach (SpriteStateManager member in currentGroup.Members)
+            {
+                member.SwitchState(member.roamingState);
+            }
         }
     }
 
     public void RemoveFromGroup(SpriteStateManager sprite)
     {
         GroupData currentGroup = groups.FirstOrDefault(group => group.Members.Any(member => member == sprite));
-        currentGroup.Members.Remove(sprite);
-        if (currentGroup.Members.Count == 1)
+        if (currentGroup != null)
         {
-            currentGroup.Members[0].isInGroup = false;
-            groups.Remove(currentGroup);
+            currentGroup.Members.Remove(sprite);
+            if (currentGroup.Members.Count == 1)
+            {
+                currentGroup.Members[0].isInGroup = false;
+                groups.Remove(currentGroup);
+            }
         }
         sprite.isInGroup = false;
     }
 
     public float GetGroupIdleDeadLine(SpriteStateManager sprite, float minIdleTime, float maxIdleTime)
     {
-        GroupData currentgroup = groups.First(group => group.Members.Any(member => member == sprite));
-
-        if (Time.time >= currentgroup.CurrentIdleTime)
+        GroupData currentGroup = groups.FirstOrDefault(group => group.Members.Any(member => member == sprite));
+        if (currentGroup == null)
         {
-            currentgroup.CurrentIdleTime = Time.time + Random.Range(minIdleTime, maxIdleTime);
+            sprite.isInGroup = false;
+            return currentGroup.CurrentIdleTime = Time.time + Random.Range(minIdleTime, maxIdleTime);
         }
-        
-        return currentgroup.CurrentIdleTime;
+        if (Time.time >= currentGroup.CurrentIdleTime)
+        {
+            currentGroup.CurrentIdleTime = Time.time + Random.Range(minIdleTime, maxIdleTime);
+        }
+
+        return currentGroup.CurrentIdleTime;
     }
 
-    public Vector3 GetCurrentGroupDestination(SpriteStateManager sprite, float roamingRadius)
+    public Vector3 GetCurrentGroupDestination(SpriteStateManager sprite)
     {
-        GroupData currentgroup = groups.First(group => group.Members.Any(member => member == sprite));
-
-        if (currentgroup.timesAskedForDestination >= currentgroup.Members.Count || currentgroup.timesAskedForDestination == 0)
+        GroupData currentGroup = groups.FirstOrDefault(group => group.Members.Any(member => member == sprite));
+        if (currentGroup == null)
         {
-            currentgroup.CurrentDestination = Random.insideUnitSphere * roamingRadius;
-            currentgroup.timesAskedForDestination = 0;
+            sprite.isInGroup = false;
+            return Vector3.zero;
         }
-        currentgroup.timesAskedForDestination++;
-        return currentgroup.CurrentDestination;
+        if (currentGroup.timesAskedForDestination >= currentGroup.Members.Count || currentGroup.timesAskedForDestination == 0)
+        {
+            currentGroup.CurrentDestination = NavigationManager.Instance.GetRandomShortDistanceDestination(sprite.transform);
+            currentGroup.timesAskedForDestination = 0;
+        }
+        currentGroup.timesAskedForDestination++;
+        return currentGroup.CurrentDestination;
     }
 
     public GroupData GetCurrentGroup(SpriteStateManager sprite)
     {
-        return groups.First(group => group.Members.Any(member => member == sprite));
+        GroupData currentGroup = groups.FirstOrDefault(group => group.Members.Any(member => member == sprite));
+        if (currentGroup == null)
+        {
+            sprite.isInGroup = false;
+        }
+        return currentGroup;
     }
 }

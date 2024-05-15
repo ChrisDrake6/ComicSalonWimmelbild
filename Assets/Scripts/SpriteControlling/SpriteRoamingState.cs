@@ -1,60 +1,58 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class SpriteRoamingState : SpriteBaseState
 {
-    float roamingRadius;
-    NavMeshAgent agent;
+    public bool emergencySwitch = false;
+
     Vector3 currentDestination;
     Animator animator;
     float timeOut;
     float currentTimeOut;
-    float arrivalLeeway;
 
-    public SpriteRoamingState(float roamingRadius, NavMeshAgent agent, Animator animator, float timeOut, float arrivalLeeway)
+
+    public SpriteRoamingState(Animator animator, float timeOut)
     {
-        this.roamingRadius = roamingRadius;
-        this.agent = agent;
         this.animator = animator;
         this.timeOut = timeOut;
-        this.arrivalLeeway = arrivalLeeway;
     }
 
     public override void EnterState(SpriteStateManager sprite)
     {
-        if (agent.isStopped)
+        if (sprite.agent.isStopped)
         {
-            agent.isStopped = false;
+            sprite.agent.isStopped = false;
         }
+        sprite.agent.avoidancePriority = Random.Range(0, 99);
 
         currentTimeOut = Time.time + timeOut;
         animator.SetBool("IsWalking", true);
 
-        Vector3 randomDirection = Vector3.zero;
-
-        if (sprite.isInGroup)
+        if (!emergencySwitch)
         {
-            currentDestination = GroupManager.Instance.GetCurrentGroupDestination(sprite, roamingRadius);
+            if (sprite.isInGroup)
+            {
+                currentDestination = GroupManager.Instance.GetCurrentGroupDestination(sprite);
+            }
+            else
+            {
+                currentDestination = NavigationManager.Instance.GetRandomShortDistanceDestination(sprite.transform);
+            }
         }
         else
         {
-            randomDirection = Random.insideUnitSphere * roamingRadius;
-            randomDirection += sprite.transform.position;
-            NavMeshHit hit;
-            NavMesh.SamplePosition(randomDirection, out hit, roamingRadius, 1);
-            currentDestination = hit.position;
+            emergencySwitch = false;
         }
-        agent.SetDestination(currentDestination);
+        sprite.agent.SetDestination(currentDestination);
     }
 
     public override void UpdateState(SpriteStateManager sprite)
-    {
-        if (Vector3.Distance(sprite.transform.position, currentDestination) <= arrivalLeeway || Time.time >= currentTimeOut)
+    {        
+        if (sprite.agent.remainingDistance <= sprite.agent.stoppingDistance || Time.time >= currentTimeOut)
         {
             sprite.SwitchState(sprite.idleState);
             if (Time.time >= currentTimeOut)
             {
-                agent.isStopped = true;
+                sprite.agent.isStopped = true;
             }
         }
     }

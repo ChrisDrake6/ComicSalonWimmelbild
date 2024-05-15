@@ -7,20 +7,17 @@ public class SpriteStateManager : MonoBehaviour
     [SerializeField] float minIdleTime;
     [SerializeField] float maxIdleTime;
 
-    [SerializeField] float roamingRadius;
-    [SerializeField] float arrivalLeeway;
-
     [SerializeField] float shortDistanceTimeOut;
     [SerializeField] float longDistanceTimeOut;
 
     [SerializeField] GameObject hoverOverIndicator;
 
-    NavMeshAgent agent;
     Animator animator;
 
     public SpriteRenderer EmojiContainer;
     public GameObject SpeechBubble;
 
+    public NavMeshAgent agent;
     public bool isInGroup;
 
     SpriteBaseState currentState;
@@ -35,14 +32,13 @@ public class SpriteStateManager : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        agent.avoidancePriority = Random.Range(0, 99);
 
         animator = GetComponent<Animator>();
 
-        arrivingState = new SpriteArrivingState(agent, animator, longDistanceTimeOut, arrivalLeeway);
+        arrivingState = new SpriteArrivingState(animator, longDistanceTimeOut);
         idleState = new SpriteIdleState(minIdleTime, maxIdleTime, animator);
-        roamingState = new SpriteRoamingState(roamingRadius, agent, animator, shortDistanceTimeOut, arrivalLeeway);
-        leavingState = new SpriteLeavingState(agent, animator, longDistanceTimeOut, arrivalLeeway);
+        roamingState = new SpriteRoamingState(animator, shortDistanceTimeOut);
+        leavingState = new SpriteLeavingState(animator, longDistanceTimeOut);
 
         SwitchState(arrivingState);
     }
@@ -102,15 +98,19 @@ public class SpriteStateManager : MonoBehaviour
     private void OnDrawGizmos()
     {
         currentState?.OnDrawGizmos(this);
+
         if (isInGroup)
         {
             GroupData currentGroup = GroupManager.Instance.GetCurrentGroup(this);
-            foreach (SpriteStateManager member in currentGroup.Members)
+            if (currentGroup != null)
             {
-                Debug.DrawLine(transform.position, member.gameObject.transform.position, Color.green);
+                foreach (SpriteStateManager member in currentGroup.Members)
+                {
+                    Debug.DrawLine(transform.position, member.gameObject.transform.position, Color.green);
+                }
             }
         }
 
-        //Gizmos.DrawWireSphere(transform.position, roamingRadius);
+        //Gizmos.DrawWireSphere(transform.position, NavigationManager.Instance.RoamingRadius);
     }
 }

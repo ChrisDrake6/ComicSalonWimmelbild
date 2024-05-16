@@ -22,9 +22,10 @@ public class LinkLine : MonoBehaviour
         if (lineRenderer.enabled)
         {
             lineRenderer.SetPosition(1, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(0) && SelectedSprite == null)
             {
                 lineRenderer.enabled = false;
+                Time.timeScale = 1;
             }
         }
     }

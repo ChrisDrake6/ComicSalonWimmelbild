@@ -14,7 +14,6 @@ public class RadialMenu : MonoBehaviour
     List<RadialMenuCakePiece> cakePieces = new List<RadialMenuCakePiece>();
     float stepLength;
 
-    public bool MouseReleased = false;
     public bool isBuilt = false;
 
     int piecesCount;
@@ -62,11 +61,7 @@ public class RadialMenu : MonoBehaviour
     private void Update()
     {
         if (isBuilt)
-        {            
-            if (Input.GetMouseButtonUp(0))
-            {
-                MouseReleased = true;
-            }
+        {   
             float mouseAngle = NormalizeAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2), Vector3.forward) + stepLength / 2f);
             int activeElementIndex = (int)(mouseAngle / stepLength);
 
@@ -83,7 +78,7 @@ public class RadialMenu : MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButtonDown(0) && MouseReleased)
+            if (Input.GetMouseButtonDown(0))
             {
                 switch (cakePieces[activeElementIndex].Action)
                 {

@@ -10,7 +10,6 @@ public class RadialMenuManager : MonoBehaviour
     public static RadialMenuManager Instance { get; private set; }
 
     SpriteStateManager currentTarget;
-    bool isLookingForPartner;
 
     public RadialMenuManager()
     {
@@ -19,18 +18,29 @@ public class RadialMenuManager : MonoBehaviour
 
     public void OnSpriteClick(SpriteStateManager sprite)
     {
-        Time.timeScale = 0;
-        currentTarget = sprite;
-        radialMenu.gameObject.SetActive(true);
-        radialMenu.Build(sprite);
+        if (!lineRenderer.enabled)
+        {
+            Time.timeScale = 0;
+            currentTarget = sprite;
+            radialMenu.gameObject.SetActive(true);
+            radialMenu.Build(sprite);
+        }
+        else
+        {
+            GroupManager.Instance.FormGroup(currentTarget);
+            CloseMenu();
+        }
     }
 
-    public void CloseMenu()
+    public void CloseMenu(bool resume = true)
     {
-        Time.timeScale = 1;
-        radialMenu.MouseReleased = false;
+        if (resume)
+        {
+            Time.timeScale = 1;
+        }
         radialMenu.gameObject.SetActive(false);
         confirmationDialogue.SetActive(false);
+        lineRenderer.enabled = false;
     }
 
     public void ConfirmSendingSpriteAway()
@@ -55,7 +65,6 @@ public class RadialMenuManager : MonoBehaviour
         radialMenu.gameObject.SetActive(false);
         lineRenderer.enabled = true;
         lineRenderer.SetPosition(0, currentTarget.transform.position);
-        isLookingForPartner = true;
     }
 
     public void UnLink()
@@ -66,15 +75,10 @@ public class RadialMenuManager : MonoBehaviour
 
     private void Update()
     {
-        if (radialMenu.gameObject.activeInHierarchy && (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)))
+        if ((radialMenu.gameObject.activeInHierarchy || confirmationDialogue.activeInHierarchy || lineRenderer.enabled) && (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)))
         {
-            CloseMenu();
+            CloseMenu(!Input.GetKeyDown(KeyCode.Escape));
         }
-        if (isLookingForPartner && Input.GetMouseButtonDown(0))
-        {
-            GroupManager.Instance.FormGroup(currentTarget);
-            isLookingForPartner = false;
-            CloseMenu();
-        }
+
     }
 }

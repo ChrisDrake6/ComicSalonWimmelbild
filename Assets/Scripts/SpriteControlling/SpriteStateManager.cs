@@ -59,9 +59,9 @@ public class SpriteStateManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnMouseDown()
+    private void OnMouseUp()
     {
-        if (Time.timeScale != 0)
+        if (!GameManager.Instance.Paused)
         {
             RadialMenuManager.Instance.OnSpriteClick(this);
             hoverOverIndicator.SetActive(false);

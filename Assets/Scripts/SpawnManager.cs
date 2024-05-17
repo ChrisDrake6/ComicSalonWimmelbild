@@ -83,8 +83,8 @@ public class SpawnManager : MonoBehaviour
         {
             // TODO: Naming Convention implementieren
             string[] files = Directory.GetFiles(directory);
-            string pathToBody = files.FirstOrDefault(a => a.Split('\\').Last().StartsWith("Body"));
-            string pathToHead = files.FirstOrDefault(a => a.Split('\\').Last().StartsWith("Eyes"));
+            string pathToBody = files.FirstOrDefault(a => a.Split('\\').Last().ToLower().StartsWith("body"));
+            string pathToHead = files.FirstOrDefault(a => a.Split('\\').Last().ToLower().StartsWith("head") || a.Split('\\').Last().ToLower().StartsWith("eyes"));
             if (pathToBody != null && pathToHead != null)
             {
                 pathToBody = Path.Combine(filePath, Path.GetFileNameWithoutExtension(directory), Path.GetFileNameWithoutExtension(pathToBody));

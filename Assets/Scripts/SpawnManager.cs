@@ -57,8 +57,15 @@ public class SpawnManager : MonoBehaviour
 
                 GameObject bodyContainer = newPrefab.transform.GetChild(0).gameObject;
                 GameObject headContainer = newPrefab.transform.GetChild(1).gameObject;
-                bodyContainer.GetComponent<SpriteRenderer>().sprite = nextSprite.BodySprite;
-                headContainer.GetComponent<SpriteRenderer>().sprite = nextSprite.HeadSprite;
+
+                Sprite headSprite = Sprite.Create(nextSprite.HeadTex, new Rect(0, 0, nextSprite.HeadTex.width, nextSprite.HeadTex.height), new Vector2(0, 0), 100F);
+                Sprite bodySprite = Sprite.Create(nextSprite.BodyTex, new Rect(0, 0, nextSprite.BodyTex.width, nextSprite.BodyTex.height), new Vector2(0, 0), 100F);
+
+                bodyContainer.GetComponent<SpriteRenderer>().sprite = headSprite;
+                headContainer.GetComponent<SpriteRenderer>().sprite = bodySprite;
+
+                nextSprite.BodySprite = bodySprite;
+                nextSprite.HeadSprite = headSprite;
 
                 newPrefab.transform.localScale /= scaleFactor;
                 newPrefab.GetComponent<SpriteStateManager>().data = nextSprite;
@@ -87,14 +94,21 @@ public class SpawnManager : MonoBehaviour
             string pathToHead = files.FirstOrDefault(a => a.Split('\\').Last().ToLower().StartsWith("head") || a.Split('\\').Last().ToLower().StartsWith("eyes"));
             if (pathToBody != null && pathToHead != null)
             {
-                pathToBody = Path.Combine(filePath, Path.GetFileNameWithoutExtension(directory), Path.GetFileNameWithoutExtension(pathToBody));
-                pathToHead = Path.Combine(filePath, Path.GetFileNameWithoutExtension(directory), Path.GetFileNameWithoutExtension(pathToHead));
+                pathToBody = Path.Combine(pathToDirectory, Path.GetFileNameWithoutExtension(directory), pathToBody);
+                pathToHead = Path.Combine(pathToDirectory, Path.GetFileNameWithoutExtension(directory), pathToHead);
 
-                var bodySprite = Resources.Load<Sprite>(pathToBody);
-                var headSprite = Resources.Load<Sprite>(pathToHead);
-                if(bodySprite != null && headSprite != null) 
+                //var bodySprite = Resources.Load<Sprite>(pathToBody);
+                //var headSprite = Resources.Load<Sprite>(pathToHead);
+
+                byte[] headFileData = File.ReadAllBytes(pathToHead);
+                byte[] bodyFileData = File.ReadAllBytes(pathToBody);
+
+                Texture2D headTex = new Texture2D(2, 2);
+                Texture2D bodyTex = new Texture2D(2, 2);
+
+                if(headTex.LoadImage(headFileData) && bodyTex.LoadImage(bodyFileData)) 
                 {
-                    newFiles.Add(new SpriteDataContainer(directory, bodySprite, headSprite));
+                    newFiles.Add(new SpriteDataContainer(directory, bodyTex, headTex));
                 }
             }
         }

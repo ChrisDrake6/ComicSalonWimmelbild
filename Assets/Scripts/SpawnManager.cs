@@ -73,7 +73,12 @@ public class SpawnManager : MonoBehaviour
     public void RefreshWaitingRoom()
     {
         List<SpriteDataContainer> newFiles = new List<SpriteDataContainer>();
-        string[] directories = Directory.GetDirectories(Path.Combine(Application.dataPath, "Resources", filePath));
+        string pathToDirectory = Path.Combine(Application.dataPath, "Resources", filePath);
+        if(!Directory.Exists(pathToDirectory))
+        {
+            Directory.CreateDirectory(pathToDirectory);
+        }
+        string[] directories = Directory.GetDirectories(pathToDirectory);
         foreach (string directory in directories)
         {
             // TODO: Naming Convention implementieren

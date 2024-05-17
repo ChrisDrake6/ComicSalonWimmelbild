@@ -27,6 +27,8 @@ public class SpriteStateManager : MonoBehaviour
     public SpriteLeavingState leavingState;
     public SpriteDataContainer data;
 
+    bool stateSwitched;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -45,13 +47,18 @@ public class SpriteStateManager : MonoBehaviour
 
     void Update()
     {
-        currentState?.UpdateState(this);
+        if (stateSwitched)
+        {
+            currentState?.UpdateState(this);
+        }
     }
 
     public void SwitchState(SpriteBaseState state)
     {
+        stateSwitched = false;
         currentState = state;
         state.EnterState(this);
+        stateSwitched = true;
     }
 
     public void Despawn()

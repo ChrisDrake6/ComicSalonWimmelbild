@@ -42,7 +42,7 @@ public class SpriteLeavingState : SpriteBaseState
 
     public override void UpdateState(SpriteStateManager sprite)
     {
-        if (sprite.agent.remainingDistance <= sprite.agent.stoppingDistance || Time.time >= currentTimeOut)
+        if (Vector3.Distance(sprite.transform.position, currentDestination) <= sprite.agent.stoppingDistance || Time.time >= currentTimeOut)
         {
             sprite.Despawn();
         }

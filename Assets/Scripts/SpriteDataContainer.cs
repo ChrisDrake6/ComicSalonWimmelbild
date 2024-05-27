@@ -8,11 +8,13 @@ public class SpriteDataContainer
     public Sprite BodySprite { get; set; }
     public Sprite HeadSprite { get; set; }
     public GameObject AssignedPrefab { get; set; }
+    public bool PresentOnScene { get; set; }
 
     public SpriteDataContainer(string pathToDirectory, Texture2D bodyTex, Texture2D headTex)
     {
         PathToDirectory = pathToDirectory;
         BodyTex = bodyTex;
         HeadTex = headTex;
+        PresentOnScene = true;
     }
 }

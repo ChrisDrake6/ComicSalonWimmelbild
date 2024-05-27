@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] float spawnInterval;
     [SerializeField] Transform spriteContainer;
     [SerializeField] float scaleFactor;
+    [SerializeField] int maxSpriteCount;
 
     float nextRefreshTime;
     float nextSpawnTime;
@@ -73,6 +74,17 @@ public class SpawnManager : MonoBehaviour
                 waitingRoom.Remove(nextSprite);
                 nextSprite.AssignedPrefab = newPrefab;
                 registeredSprites.Add(nextSprite);
+
+                List<SpriteDataContainer> presentSprites = registeredSprites.Where(a => a.PresentOnScene).ToList();
+                if (presentSprites.Count > maxSpriteCount)
+                {
+                    SpriteDataContainer oldestSpriteData = presentSprites.FirstOrDefault();
+                    if(oldestSpriteData != null)
+                    {
+                        SpriteStateManager oldestSprite = oldestSpriteData.AssignedPrefab.GetComponent<SpriteStateManager>();
+                        oldestSprite.SwitchState(oldestSprite.leavingState);
+                    }
+                }
             }
         }
     }
@@ -81,7 +93,7 @@ public class SpawnManager : MonoBehaviour
     {
         List<SpriteDataContainer> newFiles = new List<SpriteDataContainer>();
         string pathToDirectory = Path.Combine(Application.dataPath, "Resources", filePath);
-        if(!Directory.Exists(pathToDirectory))
+        if (!Directory.Exists(pathToDirectory))
         {
             Directory.CreateDirectory(pathToDirectory);
         }
@@ -106,7 +118,7 @@ public class SpawnManager : MonoBehaviour
                 Texture2D headTex = new Texture2D(2, 2);
                 Texture2D bodyTex = new Texture2D(2, 2);
 
-                if(headTex.LoadImage(headFileData) && bodyTex.LoadImage(bodyFileData)) 
+                if (headTex.LoadImage(headFileData) && bodyTex.LoadImage(bodyFileData))
                 {
                     newFiles.Add(new SpriteDataContainer(directory, bodyTex, headTex));
                 }

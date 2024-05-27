@@ -36,6 +36,8 @@ public class SpriteLeavingState : SpriteBaseState
 
         currentDestination = NavigationManager.Instance.GetClosestSpawnPosition(sprite.transform);
         sprite.agent.SetDestination(currentDestination);
+
+        sprite.data.PresentOnScene = false;
     }
 
     public override void UpdateState(SpriteStateManager sprite)

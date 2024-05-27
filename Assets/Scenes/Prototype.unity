@@ -18970,6 +18970,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1353528335454926684, guid: 12c015a3e934eb640a7e588a1e39f943, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 1926980575634943122, guid: 12c015a3e934eb640a7e588a1e39f943, type: 3}
       propertyPath: m_LocalScale.x
       value: 25
@@ -19030,6 +19034,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8274923659328558890, guid: 12c015a3e934eb640a7e588a1e39f943, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 8412131038553264841, guid: 12c015a3e934eb640a7e588a1e39f943, type: 3}
       propertyPath: m_Name
       value: SpritePrefab

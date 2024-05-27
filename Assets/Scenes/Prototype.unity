@@ -13669,6 +13669,7 @@ MonoBehaviour:
   spawnInterval: 1
   spriteContainer: {fileID: 1817029155}
   scaleFactor: 12
+  maxSpriteCount: 50
 --- !u!4 &1660957675
 Transform:
   m_ObjectHideFlags: 0

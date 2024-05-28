@@ -59,8 +59,8 @@ public class SpawnManager : MonoBehaviour
                 GameObject bodyContainer = newPrefab.transform.GetChild(0).gameObject;
                 GameObject headContainer = newPrefab.transform.GetChild(1).gameObject;
 
-                Sprite headSprite = Sprite.Create(nextSprite.HeadTex, new Rect(0, 0, nextSprite.HeadTex.width, nextSprite.HeadTex.height), new Vector2(0, 0), 100F);
-                Sprite bodySprite = Sprite.Create(nextSprite.BodyTex, new Rect(0, 0, nextSprite.BodyTex.width, nextSprite.BodyTex.height), new Vector2(0, 0), 100F);
+                Sprite headSprite = Sprite.Create(nextSprite.HeadTex, new Rect(0, 0, nextSprite.HeadTex.width, nextSprite.HeadTex.height), new Vector2(0.5F, 0.5F), 100F);
+                Sprite bodySprite = Sprite.Create(nextSprite.BodyTex, new Rect(0, 0, nextSprite.BodyTex.width, nextSprite.BodyTex.height), new Vector2(0.5F, 0.5F), 100F);
 
                 bodyContainer.GetComponent<SpriteRenderer>().sprite = headSprite;
                 headContainer.GetComponent<SpriteRenderer>().sprite = bodySprite;

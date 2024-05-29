@@ -59,27 +59,38 @@ public class SpawnManager : MonoBehaviour
                 GameObject bodyContainer = newPrefab.transform.GetChild(0).gameObject;
                 GameObject headContainer = newPrefab.transform.GetChild(1).gameObject;
 
-                Sprite headSprite = Sprite.Create(nextSprite.HeadTex, new Rect(0, 0, nextSprite.HeadTex.width, nextSprite.HeadTex.height), new Vector2(0.5F, 0.5F), 100F);
-                Sprite bodySprite = Sprite.Create(nextSprite.BodyTex, new Rect(0, 0, nextSprite.BodyTex.width, nextSprite.BodyTex.height), new Vector2(0.5F, 0.5F), 100F);
+                Texture2D bodyTex = new Texture2D(2, 2);
+                Texture2D headTex = new Texture2D(2, 2);
 
-                bodyContainer.GetComponent<SpriteRenderer>().sprite = headSprite;
-                headContainer.GetComponent<SpriteRenderer>().sprite = bodySprite;
+                if (bodyTex.LoadImage(nextSprite.BodyTexData) && headTex.LoadImage(nextSprite.HeadTexData))
+                {
+                    Sprite bodySprite = Sprite.Create(bodyTex, new Rect(0, 0, bodyTex.width, bodyTex.height), new Vector2(0.5F, 0.5F), 100F);
+                    Sprite headSprite = Sprite.Create(headTex, new Rect(0, 0, headTex.width, headTex.height), new Vector2(0.5F, 0.5F), 100F);
 
-                nextSprite.BodySprite = bodySprite;
-                nextSprite.HeadSprite = headSprite;
+                    bodyContainer.GetComponent<SpriteRenderer>().sprite = headSprite;
+                    headContainer.GetComponent<SpriteRenderer>().sprite = bodySprite;
 
-                newPrefab.transform.localScale /= scaleFactor;
-                newPrefab.GetComponent<SpriteStateManager>().data = nextSprite;
+                    nextSprite.BodySprite = bodySprite;
+                    nextSprite.HeadSprite = headSprite;
 
+                    newPrefab.transform.localScale /= scaleFactor;
+                    newPrefab.GetComponent<SpriteStateManager>().data = nextSprite;
+
+                    nextSprite.AssignedPrefab = newPrefab;
+                }
+                else
+                {
+                    Destroy(newPrefab);
+                    nextSprite.PresentOnScene = false;
+                }
                 waitingRoom.Remove(nextSprite);
-                nextSprite.AssignedPrefab = newPrefab;
                 registeredSprites.Add(nextSprite);
 
                 List<SpriteDataContainer> presentSprites = registeredSprites.Where(a => a.PresentOnScene).ToList();
                 if (presentSprites.Count > maxSpriteCount)
                 {
                     SpriteDataContainer oldestSpriteData = presentSprites.FirstOrDefault();
-                    if(oldestSpriteData != null)
+                    if (oldestSpriteData != null)
                     {
                         SpriteStateManager oldestSprite = oldestSpriteData.AssignedPrefab.GetComponent<SpriteStateManager>();
                         oldestSprite.SwitchState(oldestSprite.leavingState);
@@ -115,13 +126,7 @@ public class SpawnManager : MonoBehaviour
                 byte[] headFileData = File.ReadAllBytes(pathToHead);
                 byte[] bodyFileData = File.ReadAllBytes(pathToBody);
 
-                Texture2D headTex = new Texture2D(2, 2);
-                Texture2D bodyTex = new Texture2D(2, 2);
-
-                if (headTex.LoadImage(headFileData) && bodyTex.LoadImage(bodyFileData))
-                {
-                    newFiles.Add(new SpriteDataContainer(directory, bodyTex, headTex));
-                }
+                newFiles.Add(new SpriteDataContainer(directory, bodyFileData, headFileData));
             }
         }
         waitingRoom = newFiles.Where(newFile => !registeredSprites.Any(rS => rS.PathToDirectory == newFile.PathToDirectory)).ToList();

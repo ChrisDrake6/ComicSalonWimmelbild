@@ -80,6 +80,8 @@ public class SpawnManager : MonoBehaviour
                 }
                 else
                 {
+                    Destroy(bodyTex);
+                    Destroy(headTex);
                     Destroy(newPrefab);
                     nextSprite.PresentOnScene = false;
                 }

@@ -63,6 +63,19 @@ public class SpriteStateManager : MonoBehaviour
 
     public void Despawn()
     {
+        SpriteRenderer bodyRenderer = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer headRenderer = transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>();
+
+        Sprite bodySprite = bodyRenderer.sprite;
+        Sprite headSprite = headRenderer.sprite;
+
+        Texture2D bodyTex = bodySprite.texture;
+        Texture2D headTex = headSprite.texture;
+
+        Destroy(bodyTex);
+        Destroy(headTex);
+        Destroy(bodySprite);
+        Destroy(headSprite);
         Destroy(gameObject);
     }
 

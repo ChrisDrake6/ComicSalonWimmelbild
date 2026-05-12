@@ -125,6 +125,7 @@ public class SpawnManager : MonoBehaviour
                 //var bodySprite = Resources.Load<Sprite>(pathToBody);
                 //var headSprite = Resources.Load<Sprite>(pathToHead);
 
+                // TODO: Use UnityWebrequest?
                 byte[] headFileData = File.ReadAllBytes(pathToHead);
                 byte[] bodyFileData = File.ReadAllBytes(pathToBody);
 

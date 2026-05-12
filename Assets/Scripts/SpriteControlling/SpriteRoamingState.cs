@@ -8,59 +8,78 @@ public class SpriteRoamingState : SpriteBaseState
     Animator animator;
     float timeOut;
     float currentTimeOut;
+    private SpriteStateManager _stateManager;
 
-
-    public SpriteRoamingState(Animator animator, float timeOut)
+    public SpriteRoamingState(Animator animator, float timeOut, SpriteStateManager stateManager)
     {
         this.animator = animator;
         this.timeOut = timeOut;
+        _stateManager = stateManager;
     }
 
-    public override void EnterState(SpriteStateManager sprite)
+    public override void EnterState()
     {
-        if (sprite.agent.isStopped)
+        if (_stateManager.agent.isStopped)
         {
-            sprite.agent.isStopped = false;
+            _stateManager.agent.isStopped = false;
         }
-        sprite.agent.avoidancePriority = Random.Range(0, 99);
+        _stateManager.agent.avoidancePriority = Random.Range(0, 99);
 
         currentTimeOut = Time.time + timeOut;
         animator.SetBool("IsWalking", true);
 
         if (!emergencySwitch)
         {
-            if (sprite.isInGroup)
+            if (_stateManager.isInGroup)
             {
-                currentDestination = GroupManager.Instance.GetCurrentGroupDestination(sprite);
+                currentDestination = GroupManager.Instance.GetCurrentGroupDestination(_stateManager);
             }
             else
             {
-                currentDestination = NavigationManager.Instance.GetRandomShortDistanceDestination(sprite.transform);
+                currentDestination = NavigationManager.Instance.GetRandomShortDistanceDestination(_stateManager.transform);
             }
         }
         else
         {
             emergencySwitch = false;
         }
-        sprite.agent.SetDestination(currentDestination);
+        _stateManager.agent.SetDestination(currentDestination);
     }
 
-    public override void UpdateState(SpriteStateManager sprite)
-    {        
-        if (sprite.agent.remainingDistance <= sprite.agent.stoppingDistance || Time.time >= currentTimeOut)
+    public override void UpdateState()
+    {
+        if (_stateManager.agent.remainingDistance <= _stateManager.agent.stoppingDistance || Time.time >= currentTimeOut)
         {
-            sprite.SwitchState(sprite.idleState);
-            if (Time.time >= currentTimeOut)
+            _stateManager.SwitchState(_stateManager.idleState);
+            
+        }
+    }
+
+    public override void LeaveState()
+    {
+        animator.SetBool("IsWalking", false);
+        //if (Time.time >= currentTimeOut)
+        //{
+            _stateManager.agent.isStopped = true;
+        //}
+    }
+
+    public override void OnTriggerEnter(Collider2D collision)
+    {
+        if (collision != null && !_stateManager.isInGroup)
+        {
+            SpriteStateManager partner = collision.gameObject.GetComponent<SpriteStateManager>();
+            if (partner != null && !partner.isInGroup)
             {
-                sprite.agent.isStopped = true;
+                ConversationManager.Instance.RequestConversation(_stateManager, partner);
             }
         }
     }
 
-    public override void OnDrawGizmos(SpriteStateManager sprite)
+    public override void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(new Vector3(sprite.transform.position.x, sprite.transform.position.y + 0.75F, 0), 0.1F);
-        Debug.DrawLine(sprite.transform.position, currentDestination, Color.blue);
+        Gizmos.DrawSphere(new Vector3(_stateManager.transform.position.x, _stateManager.transform.position.y + 0.75F, 0), 0.1F);
+        Debug.DrawLine(_stateManager.transform.position, currentDestination, Color.blue);
     }
 }

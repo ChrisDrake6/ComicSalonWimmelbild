@@ -7,42 +7,52 @@ public class SpriteArrivingState : SpriteBaseState
     Animator animator;
     float timeOut;
     float currentTimeOut;
+    private SpriteStateManager _stateManager;
 
-    public SpriteArrivingState(Animator animator, float timeOut)
+    public SpriteArrivingState(Animator animator, float timeOut, SpriteStateManager stateManager)
     {
         this.animator = animator;
         this.timeOut = timeOut;
+        _stateManager = stateManager;
     }
 
-    public override void EnterState(SpriteStateManager sprite)
+    public override void EnterState()
     {
-        sprite.agent.avoidancePriority = Random.Range(0, 99);
+        _stateManager.agent.avoidancePriority = Random.Range(0, 99);
         currentTimeOut = Time.time + timeOut;
         animator.SetBool("IsWalking", true);
-        initialDestination = NavigationManager.Instance.GetRandomLongDistanceDestination(sprite.transform);
-        sprite.agent.SetDestination(initialDestination);
+        initialDestination = NavigationManager.Instance.GetRandomLongDistanceDestination(_stateManager.transform);
+        _stateManager.agent.SetDestination(initialDestination);
     }
 
-    public override void UpdateState(SpriteStateManager sprite)
+    public override void UpdateState()
     {
-        if (sprite.agent.remainingDistance <= sprite.agent.stoppingDistance || Time.time >= currentTimeOut)
+        if (_stateManager.agent.remainingDistance <= _stateManager.agent.stoppingDistance || Time.time >= currentTimeOut)
         {
-            sprite.SwitchState(sprite.idleState);
-            int areaMask = sprite.agent.areaMask;
-            areaMask -= 1 << NavMesh.GetAreaFromName("Entrance");
-            sprite.agent.areaMask = areaMask;
-
-            if (Time.time >= currentTimeOut)
-            {
-                sprite.agent.isStopped = true;
-            }
+            _stateManager.SwitchState(_stateManager.idleState);
         }
     }
 
-    public override void OnDrawGizmos(SpriteStateManager sprite)
+    public override void LeaveState()
+    {
+        animator.SetBool("IsWalking", false);
+        int areaMask = _stateManager.agent.areaMask;
+        areaMask -= 1 << NavMesh.GetAreaFromName("Entrance");
+        _stateManager.agent.areaMask = areaMask;
+        //if (Time.time >= currentTimeOut)
+        //{
+            _stateManager.agent.isStopped = true;
+        //}
+    }
+
+    public override void OnTriggerEnter(Collider2D collision)
+    {
+    }
+
+    public override void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(new Vector3(sprite.transform.position.x, sprite.transform.position.y + 0.75F, 0), 0.1F);
-        Debug.DrawLine(sprite.transform.position, initialDestination, Color.blue);
+        Gizmos.DrawSphere(new Vector3(_stateManager.transform.position.x, _stateManager.transform.position.y + 0.75F, 0), 0.1F);
+        Debug.DrawLine(_stateManager.transform.position, initialDestination, Color.blue);
     }
 }

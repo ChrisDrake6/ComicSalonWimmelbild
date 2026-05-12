@@ -14,6 +14,10 @@ public class SpriteStateManager : MonoBehaviour
 
     Animator animator;
 
+    [SerializeField] Animation talkingAnimation;
+    [SerializeField] float talkingTime;
+    [SerializeField] float talkingDelay;
+
     public SpriteRenderer EmojiContainer;
     public GameObject SpeechBubble;
 
@@ -25,6 +29,8 @@ public class SpriteStateManager : MonoBehaviour
     public SpriteRoamingState roamingState;
     public SpriteArrivingState arrivingState;
     public SpriteLeavingState leavingState;
+    public SpriteTalkingState talkingState;
+
     public SpriteDataContainer data;
 
     bool stateSwitched;
@@ -37,10 +43,11 @@ public class SpriteStateManager : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        arrivingState = new SpriteArrivingState(animator, longDistanceTimeOut);
-        idleState = new SpriteIdleState(minIdleTime, maxIdleTime, animator);
-        roamingState = new SpriteRoamingState(animator, shortDistanceTimeOut);
-        leavingState = new SpriteLeavingState(animator, longDistanceTimeOut);
+        arrivingState = new SpriteArrivingState(animator, longDistanceTimeOut, this);
+        idleState = new SpriteIdleState(minIdleTime, maxIdleTime, animator, this);
+        roamingState = new SpriteRoamingState(animator, shortDistanceTimeOut, this);
+        leavingState = new SpriteLeavingState(animator, longDistanceTimeOut, this);
+        talkingState = new SpriteTalkingState(animator, talkingTime, talkingDelay, this);
 
         SwitchState(arrivingState);
     }
@@ -49,15 +56,17 @@ public class SpriteStateManager : MonoBehaviour
     {
         if (stateSwitched)
         {
-            currentState?.UpdateState(this);
+            currentState?.UpdateState();
         }
     }
 
     public void SwitchState(SpriteBaseState state)
     {
+        // TODO: Make this a coroutine.
         stateSwitched = false;
+        currentState?.LeaveState();
         currentState = state;
-        state.EnterState(this);
+        state.EnterState();
         stateSwitched = true;
     }
 
@@ -110,6 +119,11 @@ public class SpriteStateManager : MonoBehaviour
         hoverOverIndicator.SetActive(false);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        currentState?.OnTriggerEnter(collision);
+    }
+
     public void HideBubble()
     {
         SpeechBubble.gameObject.SetActive(false);
@@ -117,7 +131,7 @@ public class SpriteStateManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        currentState?.OnDrawGizmos(this);
+        currentState?.OnDrawGizmos();
 
         if (isInGroup)
         {

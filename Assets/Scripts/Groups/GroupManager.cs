@@ -61,7 +61,7 @@ public class GroupManager : MonoBehaviour
         if (currentGroup == null)
         {
             sprite.isInGroup = false;
-            return currentGroup.CurrentIdleTime = Time.time + Random.Range(minIdleTime, maxIdleTime);
+            return Time.time + Random.Range(minIdleTime, maxIdleTime);
         }
         if (Time.time >= currentGroup.CurrentIdleTime)
         {

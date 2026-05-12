@@ -8,50 +8,60 @@ public class SpriteLeavingState : SpriteBaseState
     Animator animator;
     float timeOut;
     float currentTimeOut;
+    private SpriteStateManager _stateManager;
 
-    public SpriteLeavingState(Animator animator, float timeOut)
+    public SpriteLeavingState(Animator animator, float timeOut, SpriteStateManager stateManager)
     {
         this.animator = animator;
         this.timeOut = timeOut;
+        _stateManager = stateManager;
     }
 
-    public override void EnterState(SpriteStateManager sprite)
+    public override void EnterState()
     {
-        if (sprite.agent.isStopped)
+        if (_stateManager.agent.isStopped)
         {
-            sprite.agent.isStopped = false;
+            _stateManager.agent.isStopped = false;
         }
         currentTimeOut = Time.time + timeOut;
         animator.SetBool("IsWalking", true);
 
-        if (sprite.isInGroup)
+        if (_stateManager.isInGroup)
         {
-            GroupManager.Instance.RemoveFromGroup(sprite);
+            GroupManager.Instance.RemoveFromGroup(_stateManager);
         }
 
-        int areaMask = sprite.agent.areaMask;
+        int areaMask = _stateManager.agent.areaMask;
         areaMask |= 1 << NavMesh.GetAreaFromName("Entrance");
-        sprite.agent.areaMask = areaMask;
-        sprite.agent.avoidancePriority = 0;
+        _stateManager.agent.areaMask = areaMask;
+        _stateManager.agent.avoidancePriority = 0;
 
-        currentDestination = NavigationManager.Instance.GetClosestSpawnPosition(sprite.transform);
-        sprite.agent.SetDestination(currentDestination);
+        currentDestination = NavigationManager.Instance.GetClosestSpawnPosition(_stateManager.transform);
+        _stateManager.agent.SetDestination(currentDestination);
 
-        sprite.data.PresentOnScene = false;
+        _stateManager.data.PresentOnScene = false;
     }
 
-    public override void UpdateState(SpriteStateManager sprite)
+    public override void UpdateState()
     {
-        if (Vector3.Distance(sprite.transform.position, currentDestination) <= sprite.agent.stoppingDistance || Time.time >= currentTimeOut)
+        if (Vector3.Distance(_stateManager.transform.position, currentDestination) <= _stateManager.agent.stoppingDistance || Time.time >= currentTimeOut)
         {
-            sprite.Despawn();
+            _stateManager.Despawn();
         }
     }
 
-    public override void OnDrawGizmos(SpriteStateManager sprite)
+    public override void LeaveState()
+    {
+    }
+
+    public override void OnTriggerEnter(Collider2D collision)
+    {
+    }
+
+    public override void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(new Vector3(sprite.transform.position.x, sprite.transform.position.y + 0.75F, 0), 0.1F);
-        Debug.DrawLine(sprite.transform.position, currentDestination, Color.blue);
+        Gizmos.DrawSphere(new Vector3(_stateManager.transform.position.x, _stateManager.transform.position.y + 0.75F, 0), 0.1F);
+        Debug.DrawLine(_stateManager.transform.position, currentDestination, Color.blue);
     }
 }

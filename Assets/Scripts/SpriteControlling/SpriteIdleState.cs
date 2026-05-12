@@ -6,24 +6,25 @@ public class SpriteIdleState : SpriteBaseState
     float minIdleTime;
     float maxIdleTime;
     Animator animator;
+    private SpriteStateManager _stateManager;
 
     float nextRoamingTime;
 
-    public SpriteIdleState(float minIdleTime, float maxIdleTime, Animator animator)
+    public SpriteIdleState(float minIdleTime, float maxIdleTime, Animator animator, SpriteStateManager stateManager)
     {
         this.minIdleTime = minIdleTime;
         this.maxIdleTime = maxIdleTime;
         this.animator = animator;
+        _stateManager = stateManager;
     }
 
-    public override void EnterState(SpriteStateManager sprite)
+    public override void EnterState()
     {
-        sprite.agent.avoidancePriority = 99;
+        _stateManager.agent.avoidancePriority = 99;
 
-        animator.SetBool("IsWalking", false);
-        if (sprite.isInGroup)
+        if (_stateManager.isInGroup)
         {
-            nextRoamingTime = GroupManager.Instance.GetGroupIdleDeadLine(sprite, minIdleTime, maxIdleTime);
+            nextRoamingTime = GroupManager.Instance.GetGroupIdleDeadLine(_stateManager, minIdleTime, maxIdleTime);
         }
         else
         {
@@ -32,22 +33,30 @@ public class SpriteIdleState : SpriteBaseState
         }
     }
 
-    public override void UpdateState(SpriteStateManager sprite)
+    public override void UpdateState()
     {
-        if (sprite.agent.remainingDistance > sprite.agent.stoppingDistance)
+        if (_stateManager.agent.remainingDistance > _stateManager.agent.stoppingDistance)
         {
-            sprite.roamingState.emergencySwitch = true;
-            sprite.SwitchState(sprite.roamingState);
+            _stateManager.roamingState.emergencySwitch = true;
+            _stateManager.SwitchState(_stateManager.roamingState);
         }
         if (Time.time >= nextRoamingTime)
         {
-            sprite.SwitchState(sprite.roamingState);
+            _stateManager.SwitchState(_stateManager.roamingState);
         }
     }
 
-    public override void OnDrawGizmos(SpriteStateManager sprite)
+    public override void LeaveState()
+    {
+    }
+
+    public override void OnTriggerEnter(Collider2D collision)
+    {
+    }
+
+    public override void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(new Vector3(sprite.transform.position.x, sprite.transform.position.y + 0.75F, 0), 0.1F);
+        Gizmos.DrawSphere(new Vector3(_stateManager.transform.position.x, _stateManager.transform.position.y + 0.75F, 0), 0.1F);
     }
 }

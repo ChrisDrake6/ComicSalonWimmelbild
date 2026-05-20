@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.U2D;
 
 public class SpriteStateManager : MonoBehaviour
 {
@@ -11,25 +10,27 @@ public class SpriteStateManager : MonoBehaviour
     [SerializeField] float longDistanceTimeOut;
 
     [SerializeField] GameObject hoverOverIndicator;
+    [SerializeField] Transform head;
 
     Animator animator;
 
-    [SerializeField] Animation talkingAnimation;
     [SerializeField] float talkingTime;
     [SerializeField] float talkingDelay;
 
     public SpriteRenderer EmojiContainer;
     public GameObject SpeechBubble;
+    public GameObject CurrentHat;
 
     public NavMeshAgent agent;
-    public bool isInGroup;
+    public bool IsInGroup;
 
-    SpriteBaseState currentState;
+    public SpriteBaseState currentState;
     public SpriteIdleState idleState;
     public SpriteRoamingState roamingState;
     public SpriteArrivingState arrivingState;
     public SpriteLeavingState leavingState;
     public SpriteTalkingState talkingState;
+    public SpriteGetHatState getHatState;
 
     public SpriteDataContainer data;
 
@@ -48,8 +49,10 @@ public class SpriteStateManager : MonoBehaviour
         roamingState = new SpriteRoamingState(animator, shortDistanceTimeOut, this);
         leavingState = new SpriteLeavingState(animator, longDistanceTimeOut, this);
         talkingState = new SpriteTalkingState(animator, talkingTime, talkingDelay, this);
+        getHatState = new SpriteGetHatState(animator, longDistanceTimeOut, this, head);
 
         SwitchState(arrivingState);
+
     }
 
     void Update()
@@ -97,6 +100,13 @@ public class SpriteStateManager : MonoBehaviour
         }
     }
 
+    public void OnNewHatCreated(GameObject hat)
+    {
+        CurrentHat = hat;
+        SwitchState(getHatState);
+
+    }
+
     private void OnMouseEnter()
     {
         if (Time.timeScale != 0)
@@ -133,7 +143,7 @@ public class SpriteStateManager : MonoBehaviour
     {
         currentState?.OnDrawGizmos();
 
-        if (isInGroup)
+        if (IsInGroup)
         {
             GroupData currentGroup = GroupManager.Instance.GetCurrentGroup(this);
             if (currentGroup != null)

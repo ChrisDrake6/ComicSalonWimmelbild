@@ -355,11 +355,12 @@ MonoBehaviour:
   shortDistanceTimeOut: 10
   longDistanceTimeOut: 30
   hoverOverIndicator: {fileID: 9011711922771191376}
-  talkingAnimation: {fileID: 0}
+  head: {fileID: 7817656604882662896}
   talkingTime: 10
   talkingDelay: 2
   EmojiContainer: {fileID: 8003333247688224279}
   SpeechBubble: {fileID: 1409586642194554617}
+  CurrentHat: {fileID: 0}
   agent: {fileID: 0}
   isInGroup: 0
 --- !u!195 &1966415579691217382

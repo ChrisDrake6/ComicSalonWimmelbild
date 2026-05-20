@@ -8,7 +8,6 @@ public abstract class SpriteBaseState
 
     public abstract void LeaveState();
 
-
     public abstract void OnTriggerEnter(Collider2D collision);
 
     public abstract void OnDrawGizmos();

@@ -33,7 +33,7 @@ public class RadialMenu : MonoBehaviour
 
         for (int i = 0; i < menu.Elements.Length; i++)
         {
-            if (!(menu.Elements[i].Action == PossibleActions.Link && sprite.isInGroup) && !(menu.Elements[i].Action == PossibleActions.Unlink && !sprite.isInGroup))
+            if (!(menu.Elements[i].Action == PossibleActions.Link && sprite.IsInGroup) && !(menu.Elements[i].Action == PossibleActions.Unlink && !sprite.IsInGroup))
             {
                 RadialMenuCakePiece element = Instantiate(cakePiecePrefab, transform);
                 element.transform.localPosition = Vector3.zero;

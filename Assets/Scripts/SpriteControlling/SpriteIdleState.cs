@@ -22,7 +22,7 @@ public class SpriteIdleState : SpriteBaseState
     {
         _stateManager.agent.avoidancePriority = 99;
 
-        if (_stateManager.isInGroup)
+        if (_stateManager.IsInGroup)
         {
             nextRoamingTime = GroupManager.Instance.GetGroupIdleDeadLine(_stateManager, minIdleTime, maxIdleTime);
         }
@@ -46,13 +46,9 @@ public class SpriteIdleState : SpriteBaseState
         }
     }
 
-    public override void LeaveState()
-    {
-    }
+    public override void LeaveState() { }
 
-    public override void OnTriggerEnter(Collider2D collision)
-    {
-    }
+    public override void OnTriggerEnter(Collider2D collision) { }
 
     public override void OnDrawGizmos()
     {

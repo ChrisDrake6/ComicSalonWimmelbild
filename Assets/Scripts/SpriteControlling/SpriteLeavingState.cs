@@ -26,7 +26,7 @@ public class SpriteLeavingState : SpriteBaseState
         currentTimeOut = Time.time + timeOut;
         animator.SetBool("IsWalking", true);
 
-        if (_stateManager.isInGroup)
+        if (_stateManager.IsInGroup)
         {
             GroupManager.Instance.RemoveFromGroup(_stateManager);
         }
@@ -50,13 +50,9 @@ public class SpriteLeavingState : SpriteBaseState
         }
     }
 
-    public override void LeaveState()
-    {
-    }
+    public override void LeaveState() { }
 
-    public override void OnTriggerEnter(Collider2D collision)
-    {
-    }
+    public override void OnTriggerEnter(Collider2D collision) { }
 
     public override void OnDrawGizmos()
     {

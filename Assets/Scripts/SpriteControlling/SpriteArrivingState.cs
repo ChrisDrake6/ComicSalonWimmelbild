@@ -39,15 +39,10 @@ public class SpriteArrivingState : SpriteBaseState
         int areaMask = _stateManager.agent.areaMask;
         areaMask -= 1 << NavMesh.GetAreaFromName("Entrance");
         _stateManager.agent.areaMask = areaMask;
-        //if (Time.time >= currentTimeOut)
-        //{
-            _stateManager.agent.isStopped = true;
-        //}
+        _stateManager.agent.isStopped = true;
     }
 
-    public override void OnTriggerEnter(Collider2D collision)
-    {
-    }
+    public override void OnTriggerEnter(Collider2D collision) { }
 
     public override void OnDrawGizmos()
     {

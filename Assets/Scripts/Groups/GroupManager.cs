@@ -23,7 +23,7 @@ public class GroupManager : MonoBehaviour
             GroupData currentGroup = groups.FirstOrDefault(group => group.Members.Any(member => member == chosenPartner));
             if (currentGroup == null)
             {
-                chosenPartner.isInGroup = true;
+                chosenPartner.IsInGroup = true;
                 currentGroup = new GroupData(chosenPartner, sprite);
                 groups.Add(currentGroup);
             }
@@ -31,7 +31,7 @@ public class GroupManager : MonoBehaviour
             {
                 currentGroup.Members.Add(sprite);
             }
-            sprite.isInGroup = true;
+            sprite.IsInGroup = true;
             currentGroup.timesAskedForDestination = 0;
             foreach (SpriteStateManager member in currentGroup.Members)
             {
@@ -48,11 +48,11 @@ public class GroupManager : MonoBehaviour
             currentGroup.Members.Remove(sprite);
             if (currentGroup.Members.Count == 1)
             {
-                currentGroup.Members[0].isInGroup = false;
+                currentGroup.Members[0].IsInGroup = false;
                 groups.Remove(currentGroup);
             }
         }
-        sprite.isInGroup = false;
+        sprite.IsInGroup = false;
     }
 
     public float GetGroupIdleDeadLine(SpriteStateManager sprite, float minIdleTime, float maxIdleTime)
@@ -60,7 +60,7 @@ public class GroupManager : MonoBehaviour
         GroupData currentGroup = groups.FirstOrDefault(group => group.Members.Any(member => member == sprite));
         if (currentGroup == null)
         {
-            sprite.isInGroup = false;
+            sprite.IsInGroup = false;
             return Time.time + Random.Range(minIdleTime, maxIdleTime);
         }
         if (Time.time >= currentGroup.CurrentIdleTime)
@@ -76,7 +76,7 @@ public class GroupManager : MonoBehaviour
         GroupData currentGroup = groups.FirstOrDefault(group => group.Members.Any(member => member == sprite));
         if (currentGroup == null)
         {
-            sprite.isInGroup = false;
+            sprite.IsInGroup = false;
             return Vector3.zero;
         }
         if (currentGroup.timesAskedForDestination >= currentGroup.Members.Count || currentGroup.timesAskedForDestination == 0)
@@ -93,7 +93,7 @@ public class GroupManager : MonoBehaviour
         GroupData currentGroup = groups.FirstOrDefault(group => group.Members.Any(member => member == sprite));
         if (currentGroup == null)
         {
-            sprite.isInGroup = false;
+            sprite.IsInGroup = false;
         }
         return currentGroup;
     }

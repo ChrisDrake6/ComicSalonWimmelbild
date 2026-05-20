@@ -30,7 +30,7 @@ public class SpriteRoamingState : SpriteBaseState
 
         if (!emergencySwitch)
         {
-            if (_stateManager.isInGroup)
+            if (_stateManager.IsInGroup)
             {
                 currentDestination = GroupManager.Instance.GetCurrentGroupDestination(_stateManager);
             }
@@ -51,25 +51,22 @@ public class SpriteRoamingState : SpriteBaseState
         if (_stateManager.agent.remainingDistance <= _stateManager.agent.stoppingDistance || Time.time >= currentTimeOut)
         {
             _stateManager.SwitchState(_stateManager.idleState);
-            
+
         }
     }
 
     public override void LeaveState()
     {
         animator.SetBool("IsWalking", false);
-        //if (Time.time >= currentTimeOut)
-        //{
-            _stateManager.agent.isStopped = true;
-        //}
+        _stateManager.agent.isStopped = true;
     }
 
     public override void OnTriggerEnter(Collider2D collision)
     {
-        if (collision != null && !_stateManager.isInGroup)
+        if (collision != null && !_stateManager.IsInGroup)
         {
             SpriteStateManager partner = collision.gameObject.GetComponent<SpriteStateManager>();
-            if (partner != null && !partner.isInGroup)
+            if (partner != null && !partner.IsInGroup && partner.currentState != partner.leavingState && partner.currentState != partner.getHatState)
             {
                 ConversationManager.Instance.RequestConversation(_stateManager, partner);
             }

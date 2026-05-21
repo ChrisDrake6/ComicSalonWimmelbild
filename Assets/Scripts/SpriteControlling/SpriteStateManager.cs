@@ -84,6 +84,8 @@ public class SpriteStateManager : MonoBehaviour
         Texture2D bodyTex = bodySprite.texture;
         Texture2D headTex = headSprite.texture;
 
+        CurrentHat?.GetComponent<Hat>().SelfDestruct();
+
         Destroy(bodyTex);
         Destroy(headTex);
         Destroy(bodySprite);

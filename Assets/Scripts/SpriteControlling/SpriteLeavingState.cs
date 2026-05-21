@@ -30,7 +30,7 @@ public class SpriteLeavingState : SpriteBaseState
         {
             GroupManager.Instance.RemoveFromGroup(_stateManager);
         }
-
+        SpawnManager.Instance.registeredSprites.Remove(SpawnManager.Instance.registeredSprites.Single(a => a.AssignedPrefab == _stateManager.gameObject));
         int areaMask = _stateManager.agent.areaMask;
         areaMask |= 1 << NavMesh.GetAreaFromName("Entrance");
         _stateManager.agent.areaMask = areaMask;

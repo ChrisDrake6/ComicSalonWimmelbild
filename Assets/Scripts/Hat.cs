@@ -9,6 +9,7 @@ public class Hat : MonoBehaviour
     [SerializeField] private float lifeTime;
     [SerializeField] private float claimRequestInterval;
     [SerializeField] private HatData[] possibleHats;
+    [SerializeField] private GameObject poofPrefab;
 
     public bool IsClaimed { get; set; }
 
@@ -17,9 +18,11 @@ public class Hat : MonoBehaviour
     private HatData _chosenHat;
     private float _nextClaimRequestTime = 0;
     private int _requestCount = 0;
+    private bool _pickedUp;
 
     void Start()
     {
+        Instantiate(poofPrefab,transform.position, poofPrefab.transform.rotation);
         _chosenHat = possibleHats[UnityEngine.Random.Range(0, possibleHats.Length)];
         GetComponent<SpriteRenderer>().sprite = _chosenHat.Sprite;
         Invoke("SelfDestruct", lifeTime);
@@ -27,7 +30,7 @@ public class Hat : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time > _nextClaimRequestTime)
+        if (!_pickedUp && Time.time > _nextClaimRequestTime)
         {
             _requestCount++;
             if (_requestCount == 3)
@@ -52,14 +55,17 @@ public class Hat : MonoBehaviour
         }
     }
 
-    private void SelfDestruct()
+    public void SelfDestruct()
     {
+        GameObject poof = Instantiate(poofPrefab,transform.position, poofPrefab.transform.rotation);
+        poof.transform.localScale = Vector3.one * (defaultScale + _chosenHat.scaleModifier) / 50;
         HatDestroyed.Invoke();
         Destroy(gameObject);
     }
 
     public void OnPickUp()
     {
+        _pickedUp = true;
         transform.localPosition = new Vector2(0, defaultYOffset + _chosenHat.YOffset);
         transform.localScale = Vector3.one * (defaultScale + _chosenHat.scaleModifier);
     }

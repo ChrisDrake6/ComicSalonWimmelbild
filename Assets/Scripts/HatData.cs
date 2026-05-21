@@ -5,5 +5,5 @@ public class HatData : ScriptableObject
 {
     public Sprite Sprite;
     public float YOffset;
-    public float scaleModifier;
+    public float scale = 1;
 }

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59ef1b51031f68847bba8844c8218972, type: 3}
-  m_Name: Hat1
+  m_Name: Hat10
   m_EditorClassIdentifier: Assembly-CSharp::HatData
-  Sprite: {fileID: -8419589554073728440, guid: 4c55f0ca32b137247bf49d177848926b, type: 3}
-  YOffset: -0.14
-  scale: 1.45
+  Sprite: {fileID: -7500121863646028128, guid: 85a827fa02bb0dd4a9c39d54f96cac9d, type: 3}
+  YOffset: 0.28
+  scale: 1.02

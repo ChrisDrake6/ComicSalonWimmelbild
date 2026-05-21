@@ -3,9 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 public class Hat : MonoBehaviour
-{
-    [SerializeField] private float defaultYOffset = 11.6f;
-    [SerializeField] private float defaultScale = 4;
+{    
     [SerializeField] private float lifeTime;
     [SerializeField] private float claimRequestInterval;
     [SerializeField] private HatData[] possibleHats;
@@ -58,7 +56,7 @@ public class Hat : MonoBehaviour
     public void SelfDestruct()
     {
         GameObject poof = Instantiate(poofPrefab,transform.position, poofPrefab.transform.rotation);
-        poof.transform.localScale = Vector3.one * (defaultScale + _chosenHat.scaleModifier) / 50;
+        poof.transform.localScale = Vector3.one * (_chosenHat.scale) / 50;
         HatDestroyed.Invoke();
         Destroy(gameObject);
     }
@@ -66,7 +64,7 @@ public class Hat : MonoBehaviour
     public void OnPickUp()
     {
         _pickedUp = true;
-        transform.localPosition = new Vector2(0, defaultYOffset + _chosenHat.YOffset);
-        transform.localScale = Vector3.one * (defaultScale + _chosenHat.scaleModifier);
+        transform.localPosition = new Vector2(0, _chosenHat.YOffset);
+        transform.localScale = Vector3.one * (_chosenHat.scale);
     }
 }

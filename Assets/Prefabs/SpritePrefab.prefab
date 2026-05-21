@@ -183,6 +183,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 1
+--- !u!1 &2791944123035000158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6608300670877804252}
+  m_Layer: 0
+  m_Name: HatContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6608300670877804252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2791944123035000158}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 11.6, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 7817656604882662896}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5621145000230797971
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +243,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6608300670877804252}
   m_Father: {fileID: 1926980575634943122}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8274923659328558890
@@ -355,14 +387,14 @@ MonoBehaviour:
   shortDistanceTimeOut: 10
   longDistanceTimeOut: 30
   hoverOverIndicator: {fileID: 9011711922771191376}
-  head: {fileID: 7817656604882662896}
+  head: {fileID: 6608300670877804252}
   talkingTime: 10
   talkingDelay: 2
   EmojiContainer: {fileID: 8003333247688224279}
   SpeechBubble: {fileID: 1409586642194554617}
   CurrentHat: {fileID: 0}
   agent: {fileID: 0}
-  isInGroup: 0
+  IsInGroup: 0
 --- !u!195 &1966415579691217382
 NavMeshAgent:
   m_ObjectHideFlags: 0

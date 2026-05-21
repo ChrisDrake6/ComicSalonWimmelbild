@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.71, y: 0.71, z: 0.71}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -104,10 +104,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de18f87d46ea9244ab40ec8568a9eff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hat
-  defaultYOffset: 11.6
-  defaultScale: 4
   lifeTime: 300
   claimRequestInterval: 30
   possibleHats:
   - {fileID: 11400000, guid: 0f774caca8414ea499eec774762ad3c5, type: 2}
+  - {fileID: 11400000, guid: 7bf9716bcec5b10438cce91384d074b5, type: 2}
+  - {fileID: 11400000, guid: 7ecf7ec9166d894439b74af19961a9a4, type: 2}
+  - {fileID: 11400000, guid: 166e2e0159437a243bb0b25e1318170b, type: 2}
+  - {fileID: 11400000, guid: ccb194e0454db4444b1dd90a1b8c34b4, type: 2}
+  - {fileID: 11400000, guid: 0ff5da16a509d3e4b8745015a5841fb8, type: 2}
+  - {fileID: 11400000, guid: 50bd51552a8d5bc46a91f5eb1b494205, type: 2}
+  - {fileID: 11400000, guid: 89b574b6a921b8143a3b8bcc43ae2477, type: 2}
+  - {fileID: 11400000, guid: 6c73bbd43608af24e8c4b611c5222c92, type: 2}
+  - {fileID: 11400000, guid: 0647ad7a9223e5d4da198a6f07216034, type: 2}
+  - {fileID: 11400000, guid: 68a519d1c4e5bc047becbe6274874044, type: 2}
+  - {fileID: 11400000, guid: 67b5be00116bd0c49813e51ab1cb28ac, type: 2}
+  - {fileID: 11400000, guid: 5b764625d15d1bb4eb9cb47a781cd242, type: 2}
+  - {fileID: 11400000, guid: 370d33ce16125e541863f7f62ed220c3, type: 2}
+  - {fileID: 11400000, guid: 5dad7bb1d962fd640b86daf4c3c27af5, type: 2}
+  - {fileID: 11400000, guid: 59375d055b78fcb408b68b4c876242a9, type: 2}
   poofPrefab: {fileID: 4374415339273153551, guid: a1b35c8ab9fe63a4e951f215e7bb0e19, type: 3}

@@ -64,6 +64,7 @@ public class Hat : MonoBehaviour
     public void OnPickUp()
     {
         _pickedUp = true;
+        gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
         transform.localPosition = new Vector2(0, _chosenHat.YOffset);
         transform.localScale = Vector3.one * (_chosenHat.scale);
     }

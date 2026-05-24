@@ -1,0 +1,1260 @@
+fileFormatVersion: 2
+guid: 1c1dc185b6824f7428bf9120ba75e823
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 204dc231ec423ae4cae84437ea81bb1e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
+  multiSpriteImportData: []
+  layeredSpriteImportData:
+  - name: Seerose_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 326
+      y: 7378
+      width: 68
+      height: 50
+    spriteID: 33b85a8dd399f454cb32a48da61447b2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 326, y: 7378}
+    spritePosition: {x: 2573, y: 58}
+  - name: Seerosen_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 764
+      y: 7681
+      width: 148
+      height: 99
+    spriteID: 18356817236e1134a8a2e86e6d51bcf2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 764, y: 7681}
+    spritePosition: {x: 2044, y: 19}
+  - name: Seerosen_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 326
+      y: 7290
+      width: 77
+      height: 80
+    spriteID: ae484b87323d94740a1d9bad7528653e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 326, y: 7290}
+    spritePosition: {x: 3763, y: 1708}
+  - name: Seerosen_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 773
+      y: 7538
+      width: 112
+      height: 69
+    spriteID: e609582d043d53b4693630f33341e9eb
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 773, y: 7538}
+    spritePosition: {x: 1847, y: 24}
+  - name: Berg_Vordergrund
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 6508
+      width: 928
+      height: 537
+    spriteID: 377bd6b0cce84af4a834db7d5e2f9ec8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 6508}
+    spritePosition: {x: 0, y: 0}
+  - name: "Br\xFCcke"
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 7053
+      width: 448
+      height: 229
+    spriteID: c2df5ebdb7989e34682c6ac15c2d630e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 7053}
+    spritePosition: {x: 2255, y: 272}
+  - name: Treppe
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 7467
+      width: 210
+      height: 239
+    spriteID: e96f9f9a4d7af1b4f8d706b336a2c58c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 7467}
+    spritePosition: {x: 2721, y: 1201}
+  - name: WasserfallSchaum_Oben_5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 7714
+      width: 295
+      height: 170
+    spriteID: e11f6913a8ae83546adf7e4daa862f4c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 7714}
+    spritePosition: {x: 3545, y: 1870}
+  - name: WasserfallSchaum_Oben_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 460
+      y: 7223
+      width: 293
+      height: 153
+    spriteID: e49546fe12134c44a9eec0fe89412987
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 460, y: 7223}
+    spritePosition: {x: 3547, y: 1873}
+  - name: WasserfallSchaum_Oben_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7781
+      y: 1652
+      width: 283
+      height: 191
+    spriteID: f7c455311ac69d74e973e8a17f99ad9f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7781, y: 1652}
+    spritePosition: {x: 3557, y: 1852}
+  - name: WasserfallSchaum_Oben_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7453
+      y: 1652
+      width: 320
+      height: 178
+    spriteID: 7025011ff84894840b5d99df3636dc04
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7453, y: 1652}
+    spritePosition: {x: 3520, y: 1865}
+  - name: WasserfallSchaum_Oben_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 7290
+      width: 314
+      height: 169
+    spriteID: a164f945fcbd570409550032e9183bac
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 7290}
+    spritePosition: {x: 3526, y: 1877}
+  - name: WasserSchaum_5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 940
+      y: 6508
+      width: 1267
+      height: 196
+    spriteID: 4188fa95ce49a4a4bb11b61c9018ed06
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 940, y: 6508}
+    spritePosition: {x: 1549, y: 0}
+  - name: WasserSchaum_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 6161
+      y: 1859
+      width: 1272
+      height: 199
+    spriteID: 11def9be799cd2548bebab1365adc890
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 6161, y: 1859}
+    spritePosition: {x: 1541, y: 0}
+  - name: WasserSchaum_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 6871
+      y: 4030
+      width: 1285
+      height: 200
+    spriteID: 25de9218cbec0d243b6fb511b90a84da
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 6871, y: 4030}
+    spritePosition: {x: 1539, y: 0}
+  - name: WasserSchaum_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 6871
+      y: 3821
+      width: 1298
+      height: 201
+    spriteID: 18300cf31b0e19143a79852aae7a2e1a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 6871, y: 3821}
+    spritePosition: {x: 1536, y: 0}
+  - name: WasserSchaum_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 6161
+      y: 1652
+      width: 1284
+      height: 199
+    spriteID: 5b77e3c1c2307d445a6761a356bad4d8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 6161, y: 1652}
+    spritePosition: {x: 1540, y: 0}
+  - name: Ebene 1 Kopie 3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 6871
+      y: 2172
+      width: 1275
+      height: 1641
+    spriteID: e1852221dfe2793478e8e7e7e794eac4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 6871, y: 2172}
+    spritePosition: {x: 2565, y: 0}
+  - name: Ebene 33 Kopie
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 6161
+      y: 4
+      width: 1273
+      height: 1640
+    spriteID: 8aa78287ef83027498675fb332451241
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 6161, y: 4}
+    spritePosition: {x: 2567, y: 0}
+  - name: WasserfallSchaum_Unten_5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 7892
+      width: 295
+      height: 166
+    spriteID: 775c8b51db28a6e42869f020255e426b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 7892}
+    spritePosition: {x: 3158, y: 992}
+  - name: WasserfallSchaum_Unten_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 460
+      y: 7538
+      width: 305
+      height: 135
+    spriteID: 8291e0c9a36c8204fb40d994a6e4eccc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 460, y: 7538}
+    spritePosition: {x: 3149, y: 997}
+  - name: WasserfallSchaum_Unten_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 460
+      y: 7681
+      width: 296
+      height: 127
+    spriteID: b72aca03b981eb64ca71ffde76c8f0ae
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 460, y: 7681}
+    spritePosition: {x: 3169, y: 1000}
+  - name: WasserfallSchaum_Unten_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 460
+      y: 7384
+      width: 294
+      height: 146
+    spriteID: 5893ddc7a5f41774891cecd59db20b02
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 460, y: 7384}
+    spritePosition: {x: 3159, y: 1012}
+  - name: WasserfallSchaum_Unten_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 460
+      y: 7053
+      width: 292
+      height: 162
+    spriteID: 205250c9bb7415e488a94a33f1795b85
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 460, y: 7053}
+    spritePosition: {x: 3154, y: 1001}
+  - name: BergeOben_Foreground
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 7441
+      y: 1859
+      width: 615
+      height: 264
+    spriteID: 2ec5e76f3038a684eaf83e7f638907cd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 7441, y: 1859}
+    spritePosition: {x: 1974, y: 1534}
+  - name: BergeOben_Background
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 3852
+      y: 4
+      width: 2301
+      height: 2160
+    spriteID: 8c8b4dbeb28c8ab46b1b5f411d6a8be6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 3852, y: 4}
+    spritePosition: {x: 1304, y: 0}
+  - name: Wasser_5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2172
+      width: 2281
+      height: 2160
+    spriteID: 423727416332431478388a117ab01359
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2172}
+    spritePosition: {x: 1559, y: 0}
+  - name: Wasser_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 2293
+      y: 2172
+      width: 2281
+      height: 2160
+    spriteID: f6456b4feab9a1a4d83d74435f60de1f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 2293, y: 2172}
+    spritePosition: {x: 1559, y: 0}
+  - name: Wasser_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4582
+      y: 2172
+      width: 2281
+      height: 2160
+    spriteID: f5836efa3d132f441bf85e4922d4a5b0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4582, y: 2172}
+    spritePosition: {x: 1559, y: 0}
+  - name: Wasser_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4340
+      width: 2281
+      height: 2160
+    spriteID: 6db2460f4cdc8994e999361fb933a256
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4340}
+    spritePosition: {x: 1559, y: 0}
+  - name: Wasser_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 2293
+      y: 4340
+      width: 2281
+      height: 2160
+    spriteID: 7f10109ae3ebc0643bd8e70d3d82cc2a
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 2293, y: 4340}
+    spritePosition: {x: 1559, y: 0}
+  - name: Gras
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 3840
+      height: 2160
+    spriteID: 18ee5d9938d7c354cabce2853f089f29
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 0, y: 0}
+  spriteImportData: []
+  rigSpriteImportData: []
+  sharedRigSpriteImportData: []
+  mosaicSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  platformSettings: []
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  layerMappingOption: 2
+  generatePhysicsShape: 0
+  paperDollMode: 0
+  keepDupilcateSpriteName: 1
+  generateTileAssets: 0
+  tilePaletteCellLayout: 0
+  tilePaletteHexagonLayout: 0
+  tilePaletteCellSize: {x: 1, y: 1, z: 0}
+  tilePaletteCellSizing: 0
+  transparencySortMode: 0
+  transparencySortAxis: {x: 0, y: 0, z: 1}
+  tileTemplate: {instanceID: 0}
+  padding: 4
+  spriteSizeExpand: 0
+  skeletonAssetReferenceID: 
+  pipeline: {instanceID: 0}
+  pipelineVersion: 
+  spriteCategoryList:
+    categories: []
+  spritePackingTag: 
+  resliceFromLayer: 0
+  pSDLayerImportSetting: []
+  psdLayers:
+  - name: Seerosen
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: ee58e6fc915690645a253cc1e75005a0
+    layerID: 49
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Seerose_4
+    spriteName: Seerose_4
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 33b85a8dd399f454cb32a48da61447b2
+    layerID: 48
+    mosaicPosition: {x: 326, y: 7378}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Seerosen_3
+    spriteName: Seerosen_3
+    isGroup: 0
+    parentIndex: 0
+    spriteID: 18356817236e1134a8a2e86e6d51bcf2
+    layerID: 47
+    mosaicPosition: {x: 764, y: 7681}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Seerosen_2
+    spriteName: Seerosen_2
+    isGroup: 0
+    parentIndex: 0
+    spriteID: ae484b87323d94740a1d9bad7528653e
+    layerID: 46
+    mosaicPosition: {x: 326, y: 7290}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Seerosen_1
+    spriteName: Seerosen_1
+    isGroup: 0
+    parentIndex: 0
+    spriteID: e609582d043d53b4693630f33341e9eb
+    layerID: 45
+    mosaicPosition: {x: 773, y: 7538}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Ordner 3
+    spriteName: 
+    isGroup: 1
+    parentIndex: -1
+    spriteID: dca3b947e903b814ab0fc7fea5e96f9f
+    layerID: 43
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Berg_Vordergrund
+    spriteName: Berg_Vordergrund
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 377bd6b0cce84af4a834db7d5e2f9ec8
+    layerID: 42
+    mosaicPosition: {x: 4, y: 6508}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: "Br\xFCcke"
+    spriteName: "Br\xFCcke"
+    isGroup: 0
+    parentIndex: 5
+    spriteID: c2df5ebdb7989e34682c6ac15c2d630e
+    layerID: 41
+    mosaicPosition: {x: 4, y: 7053}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Treppe
+    spriteName: Treppe
+    isGroup: 0
+    parentIndex: 5
+    spriteID: e96f9f9a4d7af1b4f8d706b336a2c58c
+    layerID: 40
+    mosaicPosition: {x: 4, y: 7467}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserfallSchaum_Oben_Anim
+    spriteName: 
+    isGroup: 1
+    parentIndex: 5
+    spriteID: 9bef94a40b287904bb6f72e998892b93
+    layerID: 39
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: WasserfallSchaum_Oben_5
+    spriteName: WasserfallSchaum_Oben_5
+    isGroup: 0
+    parentIndex: 9
+    spriteID: e11f6913a8ae83546adf7e4daa862f4c
+    layerID: 38
+    mosaicPosition: {x: 4, y: 7714}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserfallSchaum_Oben_4
+    spriteName: WasserfallSchaum_Oben_4
+    isGroup: 0
+    parentIndex: 9
+    spriteID: e49546fe12134c44a9eec0fe89412987
+    layerID: 37
+    mosaicPosition: {x: 460, y: 7223}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserfallSchaum_Oben_3
+    spriteName: WasserfallSchaum_Oben_3
+    isGroup: 0
+    parentIndex: 9
+    spriteID: f7c455311ac69d74e973e8a17f99ad9f
+    layerID: 36
+    mosaicPosition: {x: 7781, y: 1652}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserfallSchaum_Oben_2
+    spriteName: WasserfallSchaum_Oben_2
+    isGroup: 0
+    parentIndex: 9
+    spriteID: 7025011ff84894840b5d99df3636dc04
+    layerID: 35
+    mosaicPosition: {x: 7453, y: 1652}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserfallSchaum_Oben_1
+    spriteName: WasserfallSchaum_Oben_1
+    isGroup: 0
+    parentIndex: 9
+    spriteID: a164f945fcbd570409550032e9183bac
+    layerID: 34
+    mosaicPosition: {x: 4, y: 7290}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserSchaum_Anim
+    spriteName: 
+    isGroup: 1
+    parentIndex: 5
+    spriteID: b07bf4bda45213f41b0eb4363231932d
+    layerID: 32
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: WasserSchaum_5
+    spriteName: WasserSchaum_5
+    isGroup: 0
+    parentIndex: 15
+    spriteID: 4188fa95ce49a4a4bb11b61c9018ed06
+    layerID: 31
+    mosaicPosition: {x: 940, y: 6508}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserSchaum_4
+    spriteName: WasserSchaum_4
+    isGroup: 0
+    parentIndex: 15
+    spriteID: 11def9be799cd2548bebab1365adc890
+    layerID: 30
+    mosaicPosition: {x: 6161, y: 1859}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserSchaum_3
+    spriteName: WasserSchaum_3
+    isGroup: 0
+    parentIndex: 15
+    spriteID: 25de9218cbec0d243b6fb511b90a84da
+    layerID: 29
+    mosaicPosition: {x: 6871, y: 4030}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserSchaum_2
+    spriteName: WasserSchaum_2
+    isGroup: 0
+    parentIndex: 15
+    spriteID: 18300cf31b0e19143a79852aae7a2e1a
+    layerID: 28
+    mosaicPosition: {x: 6871, y: 3821}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserSchaum_1
+    spriteName: WasserSchaum_1
+    isGroup: 0
+    parentIndex: 15
+    spriteID: 5b77e3c1c2307d445a6761a356bad4d8
+    layerID: 27
+    mosaicPosition: {x: 6161, y: 1652}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Background2
+    spriteName: 
+    isGroup: 1
+    parentIndex: 5
+    spriteID: 4ac1bf616949c314b90fbe17532fd241
+    layerID: 25
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Ebene 1 Kopie 3
+    spriteName: Ebene 1 Kopie 3
+    isGroup: 0
+    parentIndex: 21
+    spriteID: e1852221dfe2793478e8e7e7e794eac4
+    layerID: 24
+    mosaicPosition: {x: 6871, y: 2172}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Ebene 33 Kopie
+    spriteName: Ebene 33 Kopie
+    isGroup: 0
+    parentIndex: 21
+    spriteID: 8aa78287ef83027498675fb332451241
+    layerID: 23
+    mosaicPosition: {x: 6161, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserfallSchaum_Unten_Anim
+    spriteName: 
+    isGroup: 1
+    parentIndex: 5
+    spriteID: 05197ff23b2a1574487ccf2cc0990d8b
+    layerID: 21
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: WasserfallSchaum_Unten_5
+    spriteName: WasserfallSchaum_Unten_5
+    isGroup: 0
+    parentIndex: 24
+    spriteID: 775c8b51db28a6e42869f020255e426b
+    layerID: 20
+    mosaicPosition: {x: 4, y: 7892}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserfallSchaum_Unten_4
+    spriteName: WasserfallSchaum_Unten_4
+    isGroup: 0
+    parentIndex: 24
+    spriteID: 8291e0c9a36c8204fb40d994a6e4eccc
+    layerID: 19
+    mosaicPosition: {x: 460, y: 7538}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserfallSchaum_Unten_3
+    spriteName: WasserfallSchaum_Unten_3
+    isGroup: 0
+    parentIndex: 24
+    spriteID: b72aca03b981eb64ca71ffde76c8f0ae
+    layerID: 18
+    mosaicPosition: {x: 460, y: 7681}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserfallSchaum_Unten_2
+    spriteName: WasserfallSchaum_Unten_2
+    isGroup: 0
+    parentIndex: 24
+    spriteID: 5893ddc7a5f41774891cecd59db20b02
+    layerID: 17
+    mosaicPosition: {x: 460, y: 7384}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: WasserfallSchaum_Unten_1
+    spriteName: WasserfallSchaum_Unten_1
+    isGroup: 0
+    parentIndex: 24
+    spriteID: 205250c9bb7415e488a94a33f1795b85
+    layerID: 16
+    mosaicPosition: {x: 460, y: 7053}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: BergeUndWasser_Oben
+    spriteName: 
+    isGroup: 1
+    parentIndex: 5
+    spriteID: 15ca5190b326c5f4a8c28e025944002b
+    layerID: 14
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: BergeOben_Foreground
+    spriteName: BergeOben_Foreground
+    isGroup: 0
+    parentIndex: 30
+    spriteID: 2ec5e76f3038a684eaf83e7f638907cd
+    layerID: 13
+    mosaicPosition: {x: 7441, y: 1859}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: BergeOben_Background
+    spriteName: BergeOben_Background
+    isGroup: 0
+    parentIndex: 30
+    spriteID: 8c8b4dbeb28c8ab46b1b5f411d6a8be6
+    layerID: 12
+    mosaicPosition: {x: 3852, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Wasser_Anim
+    spriteName: 
+    isGroup: 1
+    parentIndex: 30
+    spriteID: c04018a27a5c426458cda48582371eb3
+    layerID: 11
+    mosaicPosition: {x: 0, y: 0}
+    flatten: 0
+    isImported: 0
+    isVisible: 1
+  - name: Wasser_5
+    spriteName: Wasser_5
+    isGroup: 0
+    parentIndex: 33
+    spriteID: 423727416332431478388a117ab01359
+    layerID: 10
+    mosaicPosition: {x: 4, y: 2172}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Wasser_4
+    spriteName: Wasser_4
+    isGroup: 0
+    parentIndex: 33
+    spriteID: f6456b4feab9a1a4d83d74435f60de1f
+    layerID: 9
+    mosaicPosition: {x: 2293, y: 2172}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Wasser_3
+    spriteName: Wasser_3
+    isGroup: 0
+    parentIndex: 33
+    spriteID: f5836efa3d132f441bf85e4922d4a5b0
+    layerID: 8
+    mosaicPosition: {x: 4582, y: 2172}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Wasser_2
+    spriteName: Wasser_2
+    isGroup: 0
+    parentIndex: 33
+    spriteID: 6db2460f4cdc8994e999361fb933a256
+    layerID: 7
+    mosaicPosition: {x: 4, y: 4340}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Wasser_1
+    spriteName: Wasser_1
+    isGroup: 0
+    parentIndex: 33
+    spriteID: 7f10109ae3ebc0643bd8e70d3d82cc2a
+    layerID: 6
+    mosaicPosition: {x: 2293, y: 4340}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Gras
+    spriteName: Gras
+    isGroup: 0
+    parentIndex: 5
+    spriteID: 18ee5d9938d7c354cabce2853f089f29
+    layerID: 3
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  mosaicPSDLayers: []
+  rigPSDLayers: []
+  sharedRigPSDLayers: []
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
+  generateGOHierarchy: 0
+  textureAssetName: 
+  prefabAssetName: 
+  spriteLibAssetName: 
+  skeletonAssetName: 
+  secondarySpriteTextures: []

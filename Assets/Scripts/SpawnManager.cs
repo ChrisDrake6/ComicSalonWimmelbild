@@ -38,8 +38,8 @@ public class SpawnManager : MonoBehaviour
     {
         // Remove SpawnPointsEntries if empty
         spawnPoints = spawnPoints.Where(a => a != null).ToArray();
-        foreach (GameObject spawnPoint in spawnPoints) 
-        { 
+        foreach (GameObject spawnPoint in spawnPoints)
+        {
             spawnPoint.transform.parent.GetComponent<Animator>().SetBool("Opened", waitingRoom.Count != 0);
         }
 
@@ -109,7 +109,15 @@ public class SpawnManager : MonoBehaviour
     public void RefreshWaitingRoom()
     {
         List<SpriteDataContainer> newFiles = new List<SpriteDataContainer>();
-        string pathToDirectory = Path.Combine(Application.dataPath, "Resources", filePath);
+        string pathToDirectory = "";
+        if (Application.isEditor)
+        {
+            pathToDirectory = Path.Combine(Application.dataPath, "Resources", filePath);
+        }
+        else
+        {
+            pathToDirectory = Path.Combine(Application.persistentDataPath, filePath);
+        }
         if (!Directory.Exists(pathToDirectory))
         {
             Directory.CreateDirectory(pathToDirectory);

@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 public class Hat : MonoBehaviour
-{    
+{
     [SerializeField] private float lifeTime;
     [SerializeField] private float claimRequestInterval;
     [SerializeField] private HatData[] possibleHats;
@@ -20,7 +20,7 @@ public class Hat : MonoBehaviour
 
     void Start()
     {
-        Instantiate(poofPrefab,transform.position, poofPrefab.transform.rotation);
+        Instantiate(poofPrefab, transform.position, poofPrefab.transform.rotation);
         _chosenHat = possibleHats[UnityEngine.Random.Range(0, possibleHats.Length)];
         GetComponent<SpriteRenderer>().sprite = _chosenHat.Sprite;
         Invoke("SelfDestruct", lifeTime);
@@ -46,16 +46,22 @@ public class Hat : MonoBehaviour
                     sprite.currentState != sprite.leavingState &&
                     sprite.currentState != sprite.getHatState);
                 }).ToArray();
-                possibleCarriers[UnityEngine.Random.Range(0, possibleCarriers.Length)].AssignedPrefab.GetComponent<SpriteStateManager>().OnNewHatCreated(gameObject);
-                _nextClaimRequestTime = Time.time + claimRequestInterval;
-                IsClaimed = true;
+
+                // bugfix for weird bug
+                int randomIndex = UnityEngine.Random.Range(0, possibleCarriers.Length);
+                if (randomIndex < possibleCarriers.Count())
+                {
+                    possibleCarriers[randomIndex].AssignedPrefab.GetComponent<SpriteStateManager>().OnNewHatCreated(gameObject);
+                    _nextClaimRequestTime = Time.time + claimRequestInterval;
+                    IsClaimed = true;
+                }
             }
         }
     }
 
     public void SelfDestruct()
     {
-        GameObject poof = Instantiate(poofPrefab,transform.position, poofPrefab.transform.rotation);
+        GameObject poof = Instantiate(poofPrefab, transform.position, poofPrefab.transform.rotation);
         poof.transform.localScale = Vector3.one * (_chosenHat.scale) / 50;
         HatDestroyed.Invoke();
         Destroy(gameObject);

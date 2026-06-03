@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Hat12
   m_EditorClassIdentifier: Assembly-CSharp::HatData
   Sprite: {fileID: 3173436183333561869, guid: 46f08508140074c40ad8ccf1b8560ab5, type: 3}
-  YOffset: 0.16
-  scale: 1
+  YOffset: 1.16
+  scale: 1.75

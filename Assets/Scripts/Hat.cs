@@ -39,6 +39,10 @@ public class Hat : MonoBehaviour
             {
                 SpriteDataContainer[] possibleCarriers = SpawnManager.Instance.registeredSprites.Where(a =>
                 {
+                    if (!a.PresentOnScene)
+                    {
+                        return false;
+                    }
                     SpriteStateManager sprite = a.AssignedPrefab.GetComponent<SpriteStateManager>();
                     return (sprite.CurrentHat == null &&
                     !sprite.IsInGroup &&
@@ -47,10 +51,9 @@ public class Hat : MonoBehaviour
                     sprite.currentState != sprite.getHatState);
                 }).ToArray();
 
-                // bugfix for weird bug
-                int randomIndex = UnityEngine.Random.Range(0, possibleCarriers.Length);
-                if (randomIndex < possibleCarriers.Count())
+                if (possibleCarriers.Length > 0)
                 {
+                    int randomIndex = UnityEngine.Random.Range(0, possibleCarriers.Length);
                     possibleCarriers[randomIndex].AssignedPrefab.GetComponent<SpriteStateManager>().OnNewHatCreated(gameObject);
                     _nextClaimRequestTime = Time.time + claimRequestInterval;
                     IsClaimed = true;

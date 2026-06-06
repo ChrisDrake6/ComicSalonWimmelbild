@@ -18146,7 +18146,7 @@ MonoBehaviour:
   refreshInterval: 10
   spawnInterval: 1
   spriteContainer: {fileID: 1817029155}
-  scaleFactor: 4.1
+  scaleFactor: 4.5
   maxSpriteCount: 50
 --- !u!4 &1660957675
 Transform:
@@ -25776,6 +25776,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 406588994}
     m_Modifications:
+    - target: {fileID: 99127292525325599, guid: ec4a14629cb8cb94eb23793a8ea31bac, type: 3}
+      propertyPath: maxHatAmount
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 420303647545325163, guid: ec4a14629cb8cb94eb23793a8ea31bac, type: 3}
       propertyPath: m_SortingOrder
       value: 1

@@ -1,6 +1,5 @@
 using System.Linq;
 using UnityEngine;
-using UnityEngine.U2D;
 
 public class ConversationManager : MonoBehaviour
 {
@@ -32,8 +31,24 @@ public class ConversationManager : MonoBehaviour
             requestCount = 0;
         }
     }
+    public bool RequestConversation()
+    {
+        requestCount++;
+        if (requestCount >= SpawnManager.Instance.registeredSprites.Count / requestThreshholdModifier)
+        {
+            requestCount = 0;
+            return true;
+        }
+        return false;
+    }
 
     public void ShowBubble(SpriteStateManager requester)
+    {
+        requester.SpeechBubble.gameObject.SetActive(true);
+        requester.EmojiContainer.sprite = emojies[Random.Range(0, emojies.Length)];
+        requester.Invoke(nameof(requester.HideBubble), bubbleDuration);
+    }
+    public void ShowBubble(PlayerFigureController requester)
     {
         requester.SpeechBubble.gameObject.SetActive(true);
         requester.EmojiContainer.sprite = emojies[Random.Range(0, emojies.Length)];

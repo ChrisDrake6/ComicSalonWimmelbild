@@ -30,7 +30,7 @@ public class SpriteTalkingState : SpriteBaseState
         if (nextSpeakTime < Time.time)
         {
             _animator.Play("DoubleJump_Quick");
-            ConversationManager.Instance.ShowBubble(_stateManager);
+            //ConversationManager.Instance.ShowBubble(_stateManager);
             nextSpeakTime = Time.time + Random.Range(0.1f, _talkingDelay);
         }
         if (endTime < Time.time)

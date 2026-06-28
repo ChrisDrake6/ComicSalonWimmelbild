@@ -384,8 +384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af25ba3187cfe4409493cf41317097e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerFigureController
-  EmojiContainer: {fileID: 8003333247688224279}
-  SpeechBubble: {fileID: 1409586642194554617}
+  emojiContainer: {fileID: 8003333247688224279}
+  speechBubble: {fileID: 1409586642194554617}
+  hatContainer: {fileID: 6608300670877804252}
 --- !u!114 &3764502470899248045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +422,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 5
-  m_Speed: 1.5
+  m_Speed: 1.75
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -563,6 +564,7 @@ MonoBehaviour:
   - rid: 6139192974911471873
   - rid: 6139192974911471874
   - rid: 6139192974911471875
+  - rid: 6139193067051417621
   m_OriginalGraph: {fileID: 2168791592091974496, guid: d44c0ae4a322ec046bce8a12d7c3fd8a, type: 2}
   m_IsInitialised: 0
   m_IsStarted: 0
@@ -593,6 +595,14 @@ MonoBehaviour:
           m_Value1: 8852949157327856257
         Name: Animator
         m_Value: {fileID: 2328051441675435945}
+    - rid: 6139193067051417621
+      type: {class: 'BlackboardVariable`1[[PlayerFigureController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 9052010384649336487
+          m_Value1: 5572275136318516918
+        Name: FigureController
+        m_Value: {fileID: 6189145049068966400}
 --- !u!1 &8477529528344143594
 GameObject:
   m_ObjectHideFlags: 0

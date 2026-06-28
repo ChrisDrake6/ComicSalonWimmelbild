@@ -25702,6 +25702,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 406588994}
     m_Modifications:
     - target: {fileID: 99127292525325599, guid: ec4a14629cb8cb94eb23793a8ea31bac, type: 3}
+      propertyPath: creationTime
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 99127292525325599, guid: ec4a14629cb8cb94eb23793a8ea31bac, type: 3}
       propertyPath: maxHatAmount
       value: 20
       objectReference: {fileID: 0}

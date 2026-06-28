@@ -79,6 +79,7 @@ public class SpawnManager : MonoBehaviour
 
                     newPrefab.transform.localScale /= scaleFactor;
                     newPrefab.GetComponent<SpriteStateManager>().data = nextSprite;
+                    newPrefab.name = "Figure" + Time.time;
 
                     nextSprite.AssignedPrefab = newPrefab;
                 }

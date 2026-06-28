@@ -68,7 +68,7 @@ public class SpriteRoamingState : SpriteBaseState
             SpriteStateManager partner = collision.gameObject.GetComponent<SpriteStateManager>();
             if (partner != null && !partner.IsInGroup && partner.currentState != partner.leavingState && partner.currentState != partner.getHatState)
             {
-                ConversationManager.Instance.RequestConversation(_stateManager, partner);
+                //ConversationManager.Instance.RequestConversation(_stateManager, partner);
             }
         }
     }

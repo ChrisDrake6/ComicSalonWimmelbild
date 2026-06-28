@@ -37,24 +37,16 @@ public class Hat : MonoBehaviour
             }
             if (!IsClaimed)
             {
-                SpriteDataContainer[] possibleCarriers = SpawnManager.Instance.registeredSprites.Where(a =>
-                {
-                    if (!a.PresentOnScene)
-                    {
-                        return false;
-                    }
-                    SpriteStateManager sprite = a.AssignedPrefab.GetComponent<SpriteStateManager>();
-                    return (sprite.CurrentHat == null &&
-                    !sprite.IsInGroup &&
-                    sprite.currentState != sprite.talkingState &&
-                    sprite.currentState != sprite.leavingState &&
-                    sprite.currentState != sprite.getHatState);
-                }).ToArray();
+                SpriteDataContainer[] possibleCarriers = SpawnManager.Instance.registeredSprites
+                    .Where(a => 
+                    a.PresentOnScene && 
+                    a.AssignedPrefab.GetComponent<PlayerFigureController>().IsInteractable() &&
+                    a.AssignedPrefab.GetComponent<PlayerFigureController>().GetCurrentHat() == null).ToArray();
 
                 if (possibleCarriers.Length > 0)
                 {
                     int randomIndex = UnityEngine.Random.Range(0, possibleCarriers.Length);
-                    possibleCarriers[randomIndex].AssignedPrefab.GetComponent<SpriteStateManager>().OnNewHatCreated(gameObject);
+                    possibleCarriers[randomIndex].AssignedPrefab.GetComponent<PlayerFigureController>().AssignHat(this);
                     _nextClaimRequestTime = Time.time + claimRequestInterval;
                     IsClaimed = true;
                 }

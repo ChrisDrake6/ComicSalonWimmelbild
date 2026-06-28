@@ -6,18 +6,18 @@ using System.IO;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] spawnPoints;
-    public List<SpriteDataContainer> registeredSprites = new List<SpriteDataContainer>();
+    public List<FigureDataContainer> registeredFigures = new List<FigureDataContainer>();
     [SerializeField] string filePath;
-    [SerializeField] GameObject spritePrefab;
+    [SerializeField] GameObject figurePrefab;
     [SerializeField] float refreshInterval;
     [SerializeField] float spawnInterval;
-    [SerializeField] Transform spriteContainer;
+    [SerializeField] Transform figureContainer;
     [SerializeField] float scaleFactor;
-    [SerializeField] int maxSpriteCount;
+    [SerializeField] int maxFigureCount;
 
     float nextRefreshTime;
     float nextSpawnTime;
-    List<SpriteDataContainer> waitingRoom = new List<SpriteDataContainer>();
+    List<FigureDataContainer> waitingRoom = new List<FigureDataContainer>();
     int spawnPointCycleTick = 0;
 
     public static SpawnManager Instance { get; private set; }
@@ -50,12 +50,12 @@ public class SpawnManager : MonoBehaviour
         }
         if (Time.time >= nextSpawnTime)
         {
-            SpriteDataContainer nextSprite = waitingRoom.FirstOrDefault();
-            if (nextSprite != null)
+            FigureDataContainer nextFigure = waitingRoom.FirstOrDefault();
+            if (nextFigure != null)
             {
                 GameObject nextSpawnPoint = spawnPoints[spawnPointCycleTick % (spawnPoints.Length)];
-                GameObject newPrefab = Instantiate(spritePrefab, nextSpawnPoint.transform);
-                newPrefab.transform.parent = spriteContainer;
+                GameObject newPrefab = Instantiate(figurePrefab, nextSpawnPoint.transform);
+                newPrefab.transform.parent = figureContainer;
 
                 spawnPointCycleTick++;
                 nextSpawnTime += spawnInterval;
@@ -66,7 +66,7 @@ public class SpawnManager : MonoBehaviour
                 Texture2D bodyTex = new Texture2D(2, 2);
                 Texture2D headTex = new Texture2D(2, 2);
 
-                if (bodyTex.LoadImage(nextSprite.BodyTexData) && headTex.LoadImage(nextSprite.HeadTexData))
+                if (bodyTex.LoadImage(nextFigure.BodyTexData) && headTex.LoadImage(nextFigure.HeadTexData))
                 {
                     Sprite bodySprite = Sprite.Create(bodyTex, new Rect(0, 0, bodyTex.width, bodyTex.height), new Vector2(0.5F, 0.5F), 100F);
                     Sprite headSprite = Sprite.Create(headTex, new Rect(0, 0, headTex.width, headTex.height), new Vector2(0.5F, 0.5F), 100F);
@@ -74,33 +74,33 @@ public class SpawnManager : MonoBehaviour
                     bodyContainer.GetComponent<SpriteRenderer>().sprite = headSprite;
                     headContainer.GetComponent<SpriteRenderer>().sprite = bodySprite;
 
-                    nextSprite.BodySprite = bodySprite;
-                    nextSprite.HeadSprite = headSprite;
+                    nextFigure.BodySprite = bodySprite;
+                    nextFigure.HeadSprite = headSprite;
 
                     newPrefab.transform.localScale /= scaleFactor;
-                    newPrefab.GetComponent<SpriteStateManager>().data = nextSprite;
+                    newPrefab.GetComponent<PlayerFigureController>().FigureData = nextFigure;
                     newPrefab.name = "Figure" + Time.time;
 
-                    nextSprite.AssignedPrefab = newPrefab;
+                    nextFigure.AssignedPrefab = newPrefab;
                 }
                 else
                 {
                     Destroy(bodyTex);
                     Destroy(headTex);
                     Destroy(newPrefab);
-                    nextSprite.PresentOnScene = false;
+                    nextFigure.PresentOnScene = false;
                 }
-                waitingRoom.Remove(nextSprite);
-                registeredSprites.Add(nextSprite);
+                waitingRoom.Remove(nextFigure);
+                registeredFigures.Add(nextFigure);
 
-                List<SpriteDataContainer> presentSprites = registeredSprites.Where(a => a.PresentOnScene).ToList();
-                if (presentSprites.Count > maxSpriteCount)
+                List<FigureDataContainer> presentSprites = registeredFigures.Where(a => a.PresentOnScene).ToList();
+                if (presentSprites.Count > maxFigureCount)
                 {
-                    SpriteDataContainer oldestSpriteData = presentSprites.FirstOrDefault();
+                    FigureDataContainer oldestSpriteData = presentSprites.FirstOrDefault();
                     if (oldestSpriteData != null)
                     {
-                        SpriteStateManager oldestSprite = oldestSpriteData.AssignedPrefab.GetComponent<SpriteStateManager>();
-                        oldestSprite.SwitchState(oldestSprite.leavingState);
+                        PlayerFigureController oldestFigure = oldestSpriteData.AssignedPrefab.GetComponent<PlayerFigureController>();
+                        oldestFigure.StartLeaving();
                     }
                 }
             }
@@ -109,7 +109,7 @@ public class SpawnManager : MonoBehaviour
 
     public void RefreshWaitingRoom()
     {
-        List<SpriteDataContainer> newFiles = new List<SpriteDataContainer>();
+        List<FigureDataContainer> newFiles = new List<FigureDataContainer>();
         string pathToDirectory = "";
         if (Application.isEditor)
         {
@@ -142,9 +142,9 @@ public class SpawnManager : MonoBehaviour
                 byte[] headFileData = File.ReadAllBytes(pathToHead);
                 byte[] bodyFileData = File.ReadAllBytes(pathToBody);
 
-                newFiles.Add(new SpriteDataContainer(directory, bodyFileData, headFileData));
+                newFiles.Add(new FigureDataContainer(directory, bodyFileData, headFileData));
             }
         }
-        waitingRoom = newFiles.Where(newFile => !registeredSprites.Any(rS => rS.PathToDirectory == newFile.PathToDirectory)).ToList();
+        waitingRoom = newFiles.Where(newFile => !registeredFigures.Any(rS => rS.PathToDirectory == newFile.PathToDirectory)).ToList();
     }
 }

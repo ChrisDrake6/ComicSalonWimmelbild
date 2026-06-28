@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62085c3286bbd264a87aca5ce37e36ce, type: 3}
   m_Name: CloseElement
   m_EditorClassIdentifier: 
-  Action: 2
+  Action: 1
   Icon: {fileID: 21300000, guid: 045a7fc13f40ee948b635fb40ff6d236, type: 3}

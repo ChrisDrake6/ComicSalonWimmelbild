@@ -5,42 +5,34 @@ public class RadialMenuManager : MonoBehaviour
 {
     [SerializeField] RadialMenu radialMenu;
     [SerializeField] GameObject confirmationDialogue;
-    [SerializeField] LineRenderer lineRenderer;
 
     public static RadialMenuManager Instance { get; private set; }
 
-    SpriteStateManager currentTarget;
+    PlayerFigureController currentTarget;
 
     public RadialMenuManager()
     {
         Instance = this;
     }
 
-    public void OnSpriteClick(SpriteStateManager sprite)
+    public void OnFigureClick(PlayerFigureController figure)
     {
-        if (!lineRenderer.enabled)
-        {
-            Time.timeScale = 0;
-            currentTarget = sprite;
-            radialMenu.gameObject.SetActive(true);
-            radialMenu.Build(sprite);
-        }
-        else
-        {
-            GroupManager.Instance.FormGroup(currentTarget);
-            CloseMenu();
-        }
+        Time.timeScale = 0;
+        GameManager.Instance.Paused = true;
+        currentTarget = figure;
+        radialMenu.gameObject.SetActive(true);
+        radialMenu.Build(figure);
     }
 
     public void CloseMenu(bool resume = true)
     {
+        radialMenu.gameObject.SetActive(false);
+        confirmationDialogue.SetActive(false);
         if (resume)
         {
             Time.timeScale = 1;
+            GameManager.Instance.Paused = false;
         }
-        radialMenu.gameObject.SetActive(false);
-        confirmationDialogue.SetActive(false);
-        lineRenderer.enabled = false;
     }
 
     public void ConfirmSendingSpriteAway()
@@ -51,34 +43,15 @@ public class RadialMenuManager : MonoBehaviour
 
     public void SendSpriteAway()
     {
-        currentTarget.SwitchState(currentTarget.leavingState);
-        CloseMenu();
-    }
-
-    public void ExportToGif()
-    {
-        // TODO: Export to gif
-    }
-
-    public void InitiateLink()
-    {
-        radialMenu.gameObject.SetActive(false);
-        lineRenderer.enabled = true;
-        lineRenderer.SetPosition(0, currentTarget.transform.position);
-    }
-
-    public void UnLink()
-    {
-        GroupManager.Instance.RemoveFromGroup(currentTarget);
+        currentTarget.StartLeaving();
         CloseMenu();
     }
 
     private void Update()
     {
-        if ((radialMenu.gameObject.activeInHierarchy || confirmationDialogue.activeInHierarchy || lineRenderer.enabled) && (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)))
+        if ((radialMenu.gameObject.activeInHierarchy || confirmationDialogue.activeInHierarchy) && (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)))
         {
             CloseMenu(!Input.GetKeyDown(KeyCode.Escape));
         }
-
     }
 }

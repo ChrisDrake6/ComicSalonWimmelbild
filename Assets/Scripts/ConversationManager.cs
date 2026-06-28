@@ -24,7 +24,7 @@ public class ConversationManager : MonoBehaviour
     public bool RequestConversation()
     {
         requestCount++;
-        if (requestCount >= SpawnManager.Instance.registeredSprites.Count / requestThreshholdModifier)
+        if (requestCount >= SpawnManager.Instance.registeredFigures.Count / requestThreshholdModifier)
         {
             requestCount = 0;
             return true;

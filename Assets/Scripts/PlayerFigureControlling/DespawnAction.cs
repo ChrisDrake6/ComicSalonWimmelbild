@@ -11,16 +11,8 @@ public partial class DespawnAction : Action
     [SerializeReference] public BlackboardVariable<PlayerFigureController> Figure;
     protected override Status OnStart()
     {
-        return Status.Running;
-    }
-
-    protected override Status OnUpdate()
-    {
+        Figure.Value.Despawn();
         return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
     }
 }
 

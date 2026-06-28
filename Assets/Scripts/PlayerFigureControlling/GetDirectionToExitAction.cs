@@ -13,16 +13,9 @@ public partial class GetDirectionToExitAction : Action
 
     protected override Status OnStart()
     {
-        return Status.Running;
-    }
-
-    protected override Status OnUpdate()
-    {
+        Direction.Value = NavigationManager.Instance.GetClosestSpawnPosition(Agent.Value.transform);
+        Agent.Value.GetComponent<PlayerFigureController>().FigureData.PresentOnScene = false;
         return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
     }
 }
 

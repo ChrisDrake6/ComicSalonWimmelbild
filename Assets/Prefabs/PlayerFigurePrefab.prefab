@@ -317,13 +317,12 @@ GameObject:
   - component: {fileID: 1926980575634943122}
   - component: {fileID: 2328051441675435945}
   - component: {fileID: 6189145049068966400}
-  - component: {fileID: 3764502470899248045}
+  - component: {fileID: 8060396141767916331}
   - component: {fileID: 1966415579691217382}
   - component: {fileID: 544020440162912762}
   - component: {fileID: 7313289608220298287}
   - component: {fileID: 143296845227818611}
   - component: {fileID: 3268983123827771874}
-  - component: {fileID: 8060396141767916331}
   m_Layer: 0
   m_Name: PlayerFigurePrefab
   m_TagString: Player
@@ -387,31 +386,63 @@ MonoBehaviour:
   emojiContainer: {fileID: 8003333247688224279}
   speechBubble: {fileID: 1409586642194554617}
   hatContainer: {fileID: 6608300670877804252}
---- !u!114 &3764502470899248045
+  _hoverOverIndicator: {fileID: 9011711922771191376}
+--- !u!114 &8060396141767916331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8412131038553264841}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3fc15075debd07419a05bfd1b6d3c3a, type: 3}
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  minIdleTime: 7
-  maxIdleTime: 15
-  shortDistanceTimeOut: 10
-  longDistanceTimeOut: 30
-  hoverOverIndicator: {fileID: 9011711922771191376}
-  head: {fileID: 6608300670877804252}
-  talkingTime: 10
-  talkingDelay: 2
-  EmojiContainer: {fileID: 8003333247688224279}
-  SpeechBubble: {fileID: 1409586642194554617}
-  CurrentHat: {fileID: 0}
-  agent: {fileID: 0}
-  IsInGroup: 0
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
+  m_Graph: {fileID: 2168791592091974496, guid: d44c0ae4a322ec046bce8a12d7c3fd8a, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 6139192974911471873
+  - rid: 6139192974911471874
+  - rid: 6139192974911471875
+  - rid: 6139193067051417621
+  m_OriginalGraph: {fileID: 2168791592091974496, guid: d44c0ae4a322ec046bce8a12d7c3fd8a, type: 2}
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 6139192974911471873
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 8412131038553264841}
+    - rid: 6139192974911471874
+      type: {class: 'BlackboardVariable`1[[UnityEngine.AI.NavMeshAgent, UnityEngine.AIModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 5313015474153036802
+          m_Value1: 12839682584096087619
+        Name: Agent
+        m_Value: {fileID: 1966415579691217382}
+    - rid: 6139192974911471875
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3407261310639014513
+          m_Value1: 8852949157327856257
+        Name: Animator
+        m_Value: {fileID: 2328051441675435945}
+    - rid: 6139193067051417621
+      type: {class: 'BlackboardVariable`1[[PlayerFigureController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 9052010384649336487
+          m_Value1: 5572275136318516918
+        Name: FigureController
+        m_Value: {fileID: 6189145049068966400}
 --- !u!195 &1966415579691217382
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -547,62 +578,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8060396141767916331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8412131038553264841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
-  m_Graph: {fileID: 2168791592091974496, guid: d44c0ae4a322ec046bce8a12d7c3fd8a, type: 2}
-  m_BlackboardVariableOverridesList:
-  - rid: 6139192974911471873
-  - rid: 6139192974911471874
-  - rid: 6139192974911471875
-  - rid: 6139193067051417621
-  m_OriginalGraph: {fileID: 2168791592091974496, guid: d44c0ae4a322ec046bce8a12d7c3fd8a, type: 2}
-  m_IsInitialised: 0
-  m_IsStarted: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 6139192974911471873
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        m_Value: {fileID: 8412131038553264841}
-    - rid: 6139192974911471874
-      type: {class: 'BlackboardVariable`1[[UnityEngine.AI.NavMeshAgent, UnityEngine.AIModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 5313015474153036802
-          m_Value1: 12839682584096087619
-        Name: Agent
-        m_Value: {fileID: 1966415579691217382}
-    - rid: 6139192974911471875
-      type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 3407261310639014513
-          m_Value1: 8852949157327856257
-        Name: Animator
-        m_Value: {fileID: 2328051441675435945}
-    - rid: 6139193067051417621
-      type: {class: 'BlackboardVariable`1[[PlayerFigureController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 9052010384649336487
-          m_Value1: 5572275136318516918
-        Name: FigureController
-        m_Value: {fileID: 6189145049068966400}
 --- !u!1 &8477529528344143594
 GameObject:
   m_ObjectHideFlags: 0

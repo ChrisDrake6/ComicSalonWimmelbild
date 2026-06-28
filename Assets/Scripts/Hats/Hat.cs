@@ -37,11 +37,11 @@ public class Hat : MonoBehaviour
             }
             if (!IsClaimed)
             {
-                SpriteDataContainer[] possibleCarriers = SpawnManager.Instance.registeredSprites
+                FigureDataContainer[] possibleCarriers = SpawnManager.Instance.registeredFigures
                     .Where(a => 
                     a.PresentOnScene && 
                     a.AssignedPrefab.GetComponent<PlayerFigureController>().IsInteractable() &&
-                    a.AssignedPrefab.GetComponent<PlayerFigureController>().GetCurrentHat() == null).ToArray();
+                    a.AssignedPrefab.GetComponent<PlayerFigureController>().CurrentHat == null).ToArray();
 
                 if (possibleCarriers.Length > 0)
                 {

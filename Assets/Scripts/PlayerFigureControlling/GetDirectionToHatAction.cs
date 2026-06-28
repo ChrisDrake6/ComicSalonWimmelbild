@@ -12,7 +12,7 @@ public partial class GetDirectionToHatAction : Action
     [SerializeReference] public BlackboardVariable<Vector2> Direction;
     protected override Status OnStart()
     {
-        Direction.Value = Figure.Value.GetCurrentHat().transform.position;
+        Direction.Value = Figure.Value.CurrentHat.transform.position;
         return Status.Success;
     }
 }

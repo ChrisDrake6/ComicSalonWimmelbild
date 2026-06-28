@@ -414,7 +414,6 @@ Transform:
   - {fileID: 1660957675}
   - {fileID: 1155145471}
   - {fileID: 758747045}
-  - {fileID: 1912964121}
   - {fileID: 1537281946}
   - {fileID: 230012427}
   m_Father: {fileID: 0}
@@ -1480,6 +1479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c26d6a5f559a6847889424d32c2ba7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lineRenderer: {fileID: 0}
   SelectedSprite: {fileID: 0}
 --- !u!1001 &386099822
 PrefabInstance:
@@ -1560,7 +1560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &406588994
 Transform:
   m_ObjectHideFlags: 0
@@ -15510,7 +15510,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radialMenu: {fileID: 1884804245}
   confirmationDialogue: {fileID: 626709362}
-  lineRenderer: {fileID: 361721550}
 --- !u!1 &1164998355
 GameObject:
   m_ObjectHideFlags: 0
@@ -18051,12 +18050,12 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1748407396}
   filePath: DrawnImages
-  spritePrefab: {fileID: 8412131038553264841, guid: 12c015a3e934eb640a7e588a1e39f943, type: 3}
+  figurePrefab: {fileID: 8412131038553264841, guid: 12c015a3e934eb640a7e588a1e39f943, type: 3}
   refreshInterval: 10
   spawnInterval: 1
-  spriteContainer: {fileID: 1817029155}
+  figureContainer: {fileID: 1817029155}
   scaleFactor: 4.5
-  maxSpriteCount: 50
+  maxFigureCount: 40
 --- !u!4 &1660957675
 Transform:
   m_ObjectHideFlags: 0
@@ -18768,7 +18767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1817029155}
   m_Layer: 0
-  m_Name: SpriteContainer
+  m_Name: FigureContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24233,50 +24232,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimatedObjekt
   maxMovingPause: 3
   minMovingPause: 1
---- !u!1 &1912964120
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1912964121}
-  - component: {fileID: 1912964122}
-  m_Layer: 0
-  m_Name: GroupManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1912964121
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912964120}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 106646390}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1912964122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912964120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd011c265300d9646a21062951b9a72a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1915182273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6958582474651520619, guid: 106dfdc1bfe92c64e98ecaff21d3ccf6, type: 3}

@@ -7,8 +7,12 @@ public class PlayerFigureController : MonoBehaviour
     [SerializeField] private SpriteRenderer emojiContainer;
     [SerializeField] private GameObject speechBubble;
     [SerializeField] private Transform hatContainer;
+    [SerializeField] private GameObject _hoverOverIndicator;
 
-    private Hat _currentHat;
+
+    public FigureDataContainer FigureData { get; set; }
+    public Hat CurrentHat { get; set; }
+
     private NavMeshAgent _navAgent;
     private BehaviorGraphAgent _graphAgent;
 
@@ -37,6 +41,29 @@ public class PlayerFigureController : MonoBehaviour
             }
         }
     }
+
+    private void OnMouseEnter()
+    {
+        if (!GameManager.Instance.Paused)
+        {
+            _hoverOverIndicator.SetActive(true);
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        _hoverOverIndicator.SetActive(false);
+    }
+
+    private void OnMouseUp()
+    {
+        if (!GameManager.Instance.Paused)
+        {
+            RadialMenuManager.Instance.OnFigureClick(this);
+            _hoverOverIndicator.SetActive(false);
+        }
+    }
+
 
     public void ShowBubble(Sprite emoji)
     {
@@ -70,22 +97,22 @@ public class PlayerFigureController : MonoBehaviour
 
     public void AssignHat(Hat hat)
     {
-        _currentHat = hat;
+        CurrentHat = hat;
         _graphAgent.SetVariableValue("FigureState", FigureState.GettingHat);
-    }
-
-    public Hat GetCurrentHat()
-    {
-        return _currentHat;
     }
 
     public void PutOnHat()
     {
-        if (_currentHat != null)
+        if (CurrentHat != null)
         {
-            _currentHat.transform.SetParent(hatContainer);
-            _currentHat.OnPickUp();
+            CurrentHat.transform.SetParent(hatContainer);
+            CurrentHat.OnPickUp();
         }
+    }
+
+    public void StartLeaving()
+    {
+        _graphAgent.SetVariableValue("FigureState", FigureState.Leaving);
     }
 
     public void Despawn()
@@ -99,9 +126,9 @@ public class PlayerFigureController : MonoBehaviour
         Texture2D bodyTex = bodySprite.texture;
         Texture2D headTex = headSprite.texture;
 
-        if (_currentHat != null)
+        if (CurrentHat != null)
         {
-            _currentHat?.GetComponent<Hat>().SelfDestruct();
+            CurrentHat?.GetComponent<Hat>().SelfDestruct();
         }
 
         Destroy(bodyTex);

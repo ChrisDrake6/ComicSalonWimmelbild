@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpriteDataContainer
+public class FigureDataContainer
 {
     public string PathToDirectory { get; private set; }
     public byte[] BodyTexData { get; private set; }
@@ -10,7 +10,7 @@ public class SpriteDataContainer
     public GameObject AssignedPrefab { get; set; }
     public bool PresentOnScene { get; set; }
 
-    public SpriteDataContainer(string pathToDirectory, byte[] bodyTexData, byte[] headTexData)
+    public FigureDataContainer(string pathToDirectory, byte[] bodyTexData, byte[] headTexData)
     {
         PathToDirectory = pathToDirectory;
         BodyTexData = bodyTexData;

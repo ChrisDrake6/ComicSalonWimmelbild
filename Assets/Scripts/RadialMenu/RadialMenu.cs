@@ -18,42 +18,39 @@ public class RadialMenu : MonoBehaviour
 
     int piecesCount;
 
-    public void Build(SpriteStateManager sprite)
+    public void Build(PlayerFigureController figure)
     {
         isBuilt = false;
         foreach (RadialMenuCakePiece piece in cakePieces)
         {
-            Destroy (piece.gameObject);
+            Destroy(piece.gameObject);
         }
 
-        piecesCount = menu.Elements.Length - 1;
+        piecesCount = menu.Elements.Length;
         stepLength = 360f / (piecesCount);
         cakePieces = new List<RadialMenuCakePiece>();
         float iconDistance = Vector3.Distance(cakePiecePrefab.Icon.transform.position, cakePiecePrefab.CakePiece.transform.position);
 
         for (int i = 0; i < menu.Elements.Length; i++)
         {
-            if (!(menu.Elements[i].Action == PossibleActions.Link && sprite.IsInGroup) && !(menu.Elements[i].Action == PossibleActions.Unlink && !sprite.IsInGroup))
-            {
-                RadialMenuCakePiece element = Instantiate(cakePiecePrefab, transform);
-                element.transform.localPosition = Vector3.zero;
-                element.transform.localRotation = Quaternion.identity;
+            RadialMenuCakePiece element = Instantiate(cakePiecePrefab, transform);
+            element.transform.localPosition = Vector3.zero;
+            element.transform.localRotation = Quaternion.identity;
 
-                element.CakePiece.fillAmount = 1f / piecesCount - gapWidthDegree / 360f;
-                element.CakePiece.transform.localPosition = Vector3.zero;
-                element.CakePiece.transform.localRotation = Quaternion.Euler(0, 0, stepLength / 2f + gapWidthDegree / 2f + cakePieces.Count * stepLength);
-                element.CakePiece.color = new Color(1f, 1f, 1f, 0.5f);
+            element.CakePiece.fillAmount = 1f / piecesCount - gapWidthDegree / 360f;
+            element.CakePiece.transform.localPosition = Vector3.zero;
+            element.CakePiece.transform.localRotation = Quaternion.Euler(0, 0, stepLength / 2f + gapWidthDegree / 2f + cakePieces.Count * stepLength);
+            element.CakePiece.color = new Color(1f, 1f, 1f, 0.5f);
 
-                element.Icon.sprite = menu.Elements[i].Icon;
-                element.Icon.transform.localPosition = element.CakePiece.transform.localPosition + Quaternion.AngleAxis(cakePieces.Count * stepLength, Vector3.forward) * Vector3.up * iconDistance;
+            element.Icon.sprite = menu.Elements[i].Icon;
+            element.Icon.transform.localPosition = element.CakePiece.transform.localPosition + Quaternion.AngleAxis(cakePieces.Count * stepLength, Vector3.forward) * Vector3.up * iconDistance;
 
-                element.Action = menu.Elements[i].Action;
-                cakePieces.Add(element);
-            }
+            element.Action = menu.Elements[i].Action;
+            cakePieces.Add(element);
         }
 
-        head.sprite = sprite.data.HeadSprite;
-        body.sprite = sprite.data.BodySprite;
+        head.sprite = figure.FigureData.HeadSprite;
+        body.sprite = figure.FigureData.BodySprite;
 
         isBuilt = true;
     }
@@ -61,7 +58,7 @@ public class RadialMenu : MonoBehaviour
     private void Update()
     {
         if (isBuilt)
-        {   
+        {
             float mouseAngle = NormalizeAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2), Vector3.forward) + stepLength / 2f);
             int activeElementIndex = (int)(mouseAngle / stepLength);
 
@@ -78,7 +75,7 @@ public class RadialMenu : MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 switch (cakePieces[activeElementIndex].Action)
                 {
@@ -87,15 +84,6 @@ public class RadialMenu : MonoBehaviour
                         break;
                     case PossibleActions.Leave:
                         RadialMenuManager.Instance.ConfirmSendingSpriteAway();
-                        break;
-                    case PossibleActions.Export:
-                        RadialMenuManager.Instance.ExportToGif();
-                        break;
-                    case PossibleActions.Link:
-                        RadialMenuManager.Instance.InitiateLink();
-                        break;
-                    case PossibleActions.Unlink:
-                        RadialMenuManager.Instance.UnLink();
                         break;
                 }
             }

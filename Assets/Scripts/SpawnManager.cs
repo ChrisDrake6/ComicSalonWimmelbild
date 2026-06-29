@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System.IO;
+using System.Threading.Tasks;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class SpawnManager : MonoBehaviour
     private float _nextSpawnTime;
     private List<FigureDataContainer> _waitingRoom = new List<FigureDataContainer>();
     private int _spawnPointCycleTick = 0;
+    private List<string> _alreadyUsedDirectorys = new List<string>();
+    private bool _isLoading;
 
     public List<FigureDataContainer> RegisteredFigures { get; set; } = new List<FigureDataContainer>();
     public static SpawnManager Instance { get; private set; }
@@ -29,7 +33,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        RefreshWaitingRoom();
+        ToggleRefresh();
         _nextRefreshTime = Time.time + refreshInterval;
         _nextSpawnTime = Time.time + spawnInterval;
     }
@@ -45,10 +49,10 @@ public class SpawnManager : MonoBehaviour
 
         if (Time.time >= _nextRefreshTime)
         {
-            RefreshWaitingRoom();
+            ToggleRefresh();
             _nextRefreshTime += refreshInterval;
         }
-        if (Time.time >= _nextSpawnTime)
+        if (Time.time >= _nextSpawnTime && _waitingRoom.Count > 0)
         {
             FigureDataContainer nextFigure = _waitingRoom.FirstOrDefault();
             if (nextFigure != null)
@@ -63,33 +67,14 @@ public class SpawnManager : MonoBehaviour
                 GameObject bodyContainer = newPrefab.transform.GetChild(0).gameObject;
                 GameObject headContainer = newPrefab.transform.GetChild(1).gameObject;
 
-                Texture2D bodyTex = new Texture2D(2, 2);
-                Texture2D headTex = new Texture2D(2, 2);
+                bodyContainer.GetComponent<SpriteRenderer>().sprite = nextFigure.HeadSprite;
+                headContainer.GetComponent<SpriteRenderer>().sprite = nextFigure.BodySprite;
 
-                if (bodyTex.LoadImage(nextFigure.BodyTexData) && headTex.LoadImage(nextFigure.HeadTexData))
-                {
-                    Sprite bodySprite = Sprite.Create(bodyTex, new Rect(0, 0, bodyTex.width, bodyTex.height), new Vector2(0.5F, 0.5F), 100F);
-                    Sprite headSprite = Sprite.Create(headTex, new Rect(0, 0, headTex.width, headTex.height), new Vector2(0.5F, 0.5F), 100F);
+                newPrefab.transform.localScale /= scaleFactor;
+                newPrefab.GetComponent<PlayerFigureController>().FigureData = nextFigure;
+                newPrefab.name = "Figure" + Time.time;
 
-                    bodyContainer.GetComponent<SpriteRenderer>().sprite = headSprite;
-                    headContainer.GetComponent<SpriteRenderer>().sprite = bodySprite;
-
-                    nextFigure.BodySprite = bodySprite;
-                    nextFigure.HeadSprite = headSprite;
-
-                    newPrefab.transform.localScale /= scaleFactor;
-                    newPrefab.GetComponent<PlayerFigureController>().FigureData = nextFigure;
-                    newPrefab.name = "Figure" + Time.time;
-
-                    nextFigure.AssignedPrefab = newPrefab;
-                }
-                else
-                {
-                    Destroy(bodyTex);
-                    Destroy(headTex);
-                    Destroy(newPrefab);
-                    nextFigure.PresentOnScene = false;
-                }
+                nextFigure.AssignedPrefab = newPrefab;
                 _waitingRoom.Remove(nextFigure);
                 RegisteredFigures.Add(nextFigure);
 
@@ -103,11 +88,20 @@ public class SpawnManager : MonoBehaviour
                         oldestFigure.StartLeaving();
                     }
                 }
-            }
+            }            
         }
     }
 
-    public void RefreshWaitingRoom()
+    public void ToggleRefresh()
+    {
+        if (_waitingRoom.Count == 0 && !_isLoading)
+        {
+            _isLoading = true;
+            StartCoroutine(RefreshWaitingRoom());
+        }
+    }
+
+    private IEnumerator RefreshWaitingRoom()
     {
         List<FigureDataContainer> newFiles = new List<FigureDataContainer>();
         string pathToDirectory = "";
@@ -126,6 +120,13 @@ public class SpawnManager : MonoBehaviour
         string[] directories = Directory.GetDirectories(pathToDirectory);
         foreach (string directory in directories)
         {
+            if (_alreadyUsedDirectorys.Contains(directory))
+            {
+                break;
+            }
+
+            _alreadyUsedDirectorys.Add(directory);
+
             // TODO: Naming Convention implementieren
             string[] files = Directory.GetFiles(directory);
             string pathToBody = files.FirstOrDefault(a => a.Split('\\', '/').Last().ToLower().StartsWith("body"));
@@ -135,17 +136,34 @@ public class SpawnManager : MonoBehaviour
                 pathToBody = Path.Combine(pathToDirectory, Path.GetFileNameWithoutExtension(directory), pathToBody);
                 pathToHead = Path.Combine(pathToDirectory, Path.GetFileNameWithoutExtension(directory), pathToHead);
 
-                //var bodySprite = Resources.Load<Sprite>(pathToBody);
-                //var headSprite = Resources.Load<Sprite>(pathToHead);
+                Task<byte[]> bodyTask = Task.Run(() => File.ReadAllBytesAsync(pathToBody));
+                Task<byte[]> headTask = Task.Run(() => File.ReadAllBytesAsync(pathToHead));
+                while (!bodyTask.IsCompleted || !headTask.IsCompleted)
+                {
+                    yield return null;
+                }
 
-                // TODO: Use UnityWebrequest?
-                byte[] headFileData = File.ReadAllBytes(pathToHead);
-                byte[] bodyFileData = File.ReadAllBytes(pathToBody);
+                Texture2D bodyTex = new Texture2D(2, 2);
+                Texture2D headTex = new Texture2D(2, 2);
 
-                newFiles.Add(new FigureDataContainer(directory, bodyFileData, headFileData));
+                //https://discussions.unity.com/t/load-image-faster/786980 No way to make this async?
+                if (bodyTex.LoadImage(bodyTask.Result) && headTex.LoadImage(headTask.Result))
+                {
+                    Sprite bodySprite = Sprite.Create(bodyTex, new Rect(0, 0, bodyTex.width, bodyTex.height), new Vector2(0.5F, 0.5F), 100F);
+                    Sprite headSprite = Sprite.Create(headTex, new Rect(0, 0, headTex.width, headTex.height), new Vector2(0.5F, 0.5F), 100F);
+
+                    newFiles.Add(new FigureDataContainer(directory, bodySprite, headSprite));
+                }
+                else
+                {
+                    Destroy(bodyTex);
+                    Destroy(headTex);
+                }
             }
         }
         _waitingRoom = newFiles.Where(newFile => !RegisteredFigures.Any(rS => rS.PathToDirectory == newFile.PathToDirectory)).ToList();
+        _isLoading = false;
+        yield return new WaitForEndOfFrame();
     }
 
     public Transform[] GetSpawnPoints()

@@ -7941,7 +7941,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1660957674}
         m_TargetAssemblyTypeName: SpawnManager, Assembly-CSharp
-        m_MethodName: RefreshWaitingRoom
+        m_MethodName: ToggleRefresh
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17893,8 +17893,8 @@ MonoBehaviour:
   - {fileID: 1748407397}
   filePath: DrawnImages
   figurePrefab: {fileID: 8412131038553264841, guid: 12c015a3e934eb640a7e588a1e39f943, type: 3}
-  refreshInterval: 10
-  spawnInterval: 1
+  refreshInterval: 60
+  spawnInterval: 2
   figureContainer: {fileID: 1817029155}
   scaleFactor: 4.5
   maxFigureCount: 40

@@ -5,21 +5,21 @@ using System.IO;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject[] spawnPoints;
-    public List<FigureDataContainer> registeredFigures = new List<FigureDataContainer>();
-    [SerializeField] string filePath;
-    [SerializeField] GameObject figurePrefab;
-    [SerializeField] float refreshInterval;
-    [SerializeField] float spawnInterval;
-    [SerializeField] Transform figureContainer;
-    [SerializeField] float scaleFactor;
-    [SerializeField] int maxFigureCount;
+    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private string filePath;
+    [SerializeField] private GameObject figurePrefab;
+    [SerializeField] private float refreshInterval;
+    [SerializeField] private float spawnInterval;
+    [SerializeField] private Transform figureContainer;
+    [SerializeField] private float scaleFactor;
+    [SerializeField] private int maxFigureCount;
 
-    float nextRefreshTime;
-    float nextSpawnTime;
-    List<FigureDataContainer> waitingRoom = new List<FigureDataContainer>();
-    int spawnPointCycleTick = 0;
+    private float _nextRefreshTime;
+    private float _nextSpawnTime;
+    private List<FigureDataContainer> _waitingRoom = new List<FigureDataContainer>();
+    private int _spawnPointCycleTick = 0;
 
+    public List<FigureDataContainer> RegisteredFigures { get; set; } = new List<FigureDataContainer>();
     public static SpawnManager Instance { get; private set; }
 
     public SpawnManager()
@@ -30,35 +30,35 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         RefreshWaitingRoom();
-        nextRefreshTime = Time.time + refreshInterval;
-        nextSpawnTime = Time.time + spawnInterval;
+        _nextRefreshTime = Time.time + refreshInterval;
+        _nextSpawnTime = Time.time + spawnInterval;
     }
 
     void Update()
     {
         // Remove SpawnPointsEntries if empty
         spawnPoints = spawnPoints.Where(a => a != null).ToArray();
-        foreach (GameObject spawnPoint in spawnPoints)
+        foreach (Transform spawnPoint in spawnPoints)
         {
-            spawnPoint.transform.parent.GetComponent<Animator>().SetBool("Opened", waitingRoom.Count != 0);
+            spawnPoint.parent.GetComponent<Animator>().SetBool("Opened", _waitingRoom.Count != 0);
         }
 
-        if (Time.time >= nextRefreshTime)
+        if (Time.time >= _nextRefreshTime)
         {
             RefreshWaitingRoom();
-            nextRefreshTime += refreshInterval;
+            _nextRefreshTime += refreshInterval;
         }
-        if (Time.time >= nextSpawnTime)
+        if (Time.time >= _nextSpawnTime)
         {
-            FigureDataContainer nextFigure = waitingRoom.FirstOrDefault();
+            FigureDataContainer nextFigure = _waitingRoom.FirstOrDefault();
             if (nextFigure != null)
             {
-                GameObject nextSpawnPoint = spawnPoints[spawnPointCycleTick % (spawnPoints.Length)];
-                GameObject newPrefab = Instantiate(figurePrefab, nextSpawnPoint.transform);
+                Transform nextSpawnPoint = spawnPoints[_spawnPointCycleTick % (spawnPoints.Length)];
+                GameObject newPrefab = Instantiate(figurePrefab, nextSpawnPoint);
                 newPrefab.transform.parent = figureContainer;
 
-                spawnPointCycleTick++;
-                nextSpawnTime += spawnInterval;
+                _spawnPointCycleTick++;
+                _nextSpawnTime += spawnInterval;
 
                 GameObject bodyContainer = newPrefab.transform.GetChild(0).gameObject;
                 GameObject headContainer = newPrefab.transform.GetChild(1).gameObject;
@@ -90,10 +90,10 @@ public class SpawnManager : MonoBehaviour
                     Destroy(newPrefab);
                     nextFigure.PresentOnScene = false;
                 }
-                waitingRoom.Remove(nextFigure);
-                registeredFigures.Add(nextFigure);
+                _waitingRoom.Remove(nextFigure);
+                RegisteredFigures.Add(nextFigure);
 
-                List<FigureDataContainer> presentSprites = registeredFigures.Where(a => a.PresentOnScene).ToList();
+                List<FigureDataContainer> presentSprites = RegisteredFigures.Where(a => a.PresentOnScene).ToList();
                 if (presentSprites.Count > maxFigureCount)
                 {
                     FigureDataContainer oldestSpriteData = presentSprites.FirstOrDefault();
@@ -145,6 +145,11 @@ public class SpawnManager : MonoBehaviour
                 newFiles.Add(new FigureDataContainer(directory, bodyFileData, headFileData));
             }
         }
-        waitingRoom = newFiles.Where(newFile => !registeredFigures.Any(rS => rS.PathToDirectory == newFile.PathToDirectory)).ToList();
+        _waitingRoom = newFiles.Where(newFile => !RegisteredFigures.Any(rS => rS.PathToDirectory == newFile.PathToDirectory)).ToList();
+    }
+
+    public Transform[] GetSpawnPoints()
+    {
+        return spawnPoints;
     }
 }

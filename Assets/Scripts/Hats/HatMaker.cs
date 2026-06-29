@@ -20,7 +20,7 @@ public class HatMaker : MonoBehaviour
 
     public void StartCreating()
     {
-        if (SpawnManager.Instance.registeredFigures.Where(a=> a.PresentOnScene).Count() > 0 && maxHatAmount > _hatCount && !FindObjectsByType<Hat>().Any(a => a.IsClaimed == false) && _hatCount < SpawnManager.Instance.registeredFigures.Where(a => a.PresentOnScene).Count())
+        if (SpawnManager.Instance.RegisteredFigures.Where(a=> a.PresentOnScene).Count() > 0 && maxHatAmount > _hatCount && !FindObjectsByType<Hat>().Any(a => a.IsClaimed == false) && _hatCount < SpawnManager.Instance.RegisteredFigures.Where(a => a.PresentOnScene).Count())
         {
             GetComponent<Animator>().SetTrigger("StartCreating");
         }

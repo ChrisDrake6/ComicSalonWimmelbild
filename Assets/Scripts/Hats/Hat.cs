@@ -37,7 +37,7 @@ public class Hat : MonoBehaviour
             }
             if (!IsClaimed)
             {
-                FigureDataContainer[] possibleCarriers = SpawnManager.Instance.registeredFigures
+                FigureDataContainer[] possibleCarriers = SpawnManager.Instance.RegisteredFigures
                     .Where(a => 
                     a.PresentOnScene && 
                     a.AssignedPrefab.GetComponent<PlayerFigureController>().IsInteractable() &&

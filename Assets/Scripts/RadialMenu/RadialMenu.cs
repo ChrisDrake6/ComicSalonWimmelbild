@@ -4,31 +4,31 @@ using UnityEngine;
 
 public class RadialMenu : MonoBehaviour
 {
-    [SerializeField] RadialMenuSO menu;
-    [SerializeField] RadialMenuCakePiece cakePiecePrefab;
-    [SerializeField] float gapWidthDegree = 1;
+    [SerializeField] private RadialMenuSO menu;
+    [SerializeField] private RadialMenuCakePiece cakePiecePrefab;
+    [SerializeField] private float gapWidthDegree = 1;
 
-    [SerializeField] SpriteRenderer head;
-    [SerializeField] SpriteRenderer body;
+    [SerializeField] private SpriteRenderer head;
+    [SerializeField] private SpriteRenderer body;
 
-    List<RadialMenuCakePiece> cakePieces = new List<RadialMenuCakePiece>();
-    float stepLength;
+    private List<RadialMenuCakePiece> _cakePieces = new List<RadialMenuCakePiece>();
+    private float _stepLength;
 
-    public bool isBuilt = false;
+    private bool _isBuilt = false;
 
     int piecesCount;
 
     public void Build(PlayerFigureController figure)
     {
-        isBuilt = false;
-        foreach (RadialMenuCakePiece piece in cakePieces)
+        _isBuilt = false;
+        foreach (RadialMenuCakePiece piece in _cakePieces)
         {
             Destroy(piece.gameObject);
         }
 
         piecesCount = menu.Elements.Length;
-        stepLength = 360f / (piecesCount);
-        cakePieces = new List<RadialMenuCakePiece>();
+        _stepLength = 360f / (piecesCount);
+        _cakePieces = new List<RadialMenuCakePiece>();
         float iconDistance = Vector3.Distance(cakePiecePrefab.Icon.transform.position, cakePiecePrefab.CakePiece.transform.position);
 
         for (int i = 0; i < menu.Elements.Length; i++)
@@ -39,45 +39,45 @@ public class RadialMenu : MonoBehaviour
 
             element.CakePiece.fillAmount = 1f / piecesCount - gapWidthDegree / 360f;
             element.CakePiece.transform.localPosition = Vector3.zero;
-            element.CakePiece.transform.localRotation = Quaternion.Euler(0, 0, stepLength / 2f + gapWidthDegree / 2f + cakePieces.Count * stepLength);
+            element.CakePiece.transform.localRotation = Quaternion.Euler(0, 0, _stepLength / 2f + gapWidthDegree / 2f + _cakePieces.Count * _stepLength);
             element.CakePiece.color = new Color(1f, 1f, 1f, 0.5f);
 
             element.Icon.sprite = menu.Elements[i].Icon;
-            element.Icon.transform.localPosition = element.CakePiece.transform.localPosition + Quaternion.AngleAxis(cakePieces.Count * stepLength, Vector3.forward) * Vector3.up * iconDistance;
+            element.Icon.transform.localPosition = element.CakePiece.transform.localPosition + Quaternion.AngleAxis(_cakePieces.Count * _stepLength, Vector3.forward) * Vector3.up * iconDistance;
 
             element.Action = menu.Elements[i].Action;
-            cakePieces.Add(element);
+            _cakePieces.Add(element);
         }
 
         head.sprite = figure.FigureData.HeadSprite;
         body.sprite = figure.FigureData.BodySprite;
 
-        isBuilt = true;
+        _isBuilt = true;
     }
 
     private void Update()
     {
-        if (isBuilt)
+        if (_isBuilt)
         {
-            float mouseAngle = NormalizeAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2), Vector3.forward) + stepLength / 2f);
-            int activeElementIndex = (int)(mouseAngle / stepLength);
+            float mouseAngle = NormalizeAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - new Vector3(Screen.width / 2, Screen.height / 2), Vector3.forward) + _stepLength / 2f);
+            int activeElementIndex = (int)(mouseAngle / _stepLength);
 
             for (int i = 0; i < piecesCount; i++)
             {
                 if (i == activeElementIndex)
                 {
-                    cakePieces[i].CakePiece.color = new Color(1f, 1f, 1f, 0.75f);
+                    _cakePieces[i].CakePiece.color = new Color(1f, 1f, 1f, 0.75f);
 
                 }
                 else
                 {
-                    cakePieces[i].CakePiece.color = new Color(1f, 1f, 1f, 0.5f);
+                    _cakePieces[i].CakePiece.color = new Color(1f, 1f, 1f, 0.5f);
                 }
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                switch (cakePieces[activeElementIndex].Action)
+                switch (_cakePieces[activeElementIndex].Action)
                 {
                     case PossibleActions.Cancel:
                         RadialMenuManager.Instance.CloseMenu();

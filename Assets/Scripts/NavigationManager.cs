@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class NavigationManager : MonoBehaviour
 {
-    public float RoamingRadius;
+    [SerializeField] private float roamingRadius;
 
     public static NavigationManager Instance { get; private set; }
 
@@ -26,7 +26,7 @@ public class NavigationManager : MonoBehaviour
 
     public Vector3 GetRandomShortDistanceDestination(Transform origin)
     {
-        Vector3 randomDirection = Random.insideUnitSphere * RoamingRadius;
+        Vector3 randomDirection = Random.insideUnitSphere * roamingRadius;
         randomDirection += origin.position;
         randomDirection.z = 0;
 
@@ -37,7 +37,7 @@ public class NavigationManager : MonoBehaviour
 
     public Vector3 GetClosestSpawnPosition(Transform origin)
     {
-        GameObject closestSpawnPoint = SpawnManager.Instance.spawnPoints.OrderBy(a => Vector3.Distance(origin.position, a.transform.position)).First();
-        return closestSpawnPoint.transform.position;
+        Transform closestSpawnPoint = SpawnManager.Instance.GetSpawnPoints().OrderBy(a => Vector3.Distance(origin.position, a.position)).First();
+        return closestSpawnPoint.position;
     }
 }

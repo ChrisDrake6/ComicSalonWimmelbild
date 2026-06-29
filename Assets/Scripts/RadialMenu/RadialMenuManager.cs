@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class RadialMenuManager : MonoBehaviour
 {
-    [SerializeField] RadialMenu radialMenu;
-    [SerializeField] GameObject confirmationDialogue;
+    [SerializeField] private RadialMenu radialMenu;
+    [SerializeField] private GameObject confirmationDialogue;
 
     public static RadialMenuManager Instance { get; private set; }
 
-    PlayerFigureController currentTarget;
+    private PlayerFigureController _currentTarget;
 
     public RadialMenuManager()
     {
@@ -19,7 +19,7 @@ public class RadialMenuManager : MonoBehaviour
     {
         Time.timeScale = 0;
         GameManager.Instance.Paused = true;
-        currentTarget = figure;
+        _currentTarget = figure;
         radialMenu.gameObject.SetActive(true);
         radialMenu.Build(figure);
     }
@@ -43,7 +43,7 @@ public class RadialMenuManager : MonoBehaviour
 
     public void SendSpriteAway()
     {
-        currentTarget.StartLeaving();
+        _currentTarget.StartLeaving();
         CloseMenu();
     }
 

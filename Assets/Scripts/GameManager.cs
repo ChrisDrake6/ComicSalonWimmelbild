@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject pauseWindow;
-    [SerializeField] GameObject confirmationWindow;
+    [SerializeField] private GameObject pauseWindow;
+    [SerializeField] private GameObject confirmationWindow;
 
     public bool Paused { get; set; }
 

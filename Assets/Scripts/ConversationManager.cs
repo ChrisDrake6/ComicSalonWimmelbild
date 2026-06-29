@@ -6,8 +6,8 @@ public class ConversationManager : MonoBehaviour
     [SerializeField] private float requestThreshholdModifier;
     [SerializeField] private float bubbleDuration;
 
-    private Sprite[] emojies;
-    private float requestCount = 0;
+    private Sprite[] _emojies;
+    private float _requestCount = 0;
 
     public static ConversationManager Instance { get; private set; }
 
@@ -18,15 +18,15 @@ public class ConversationManager : MonoBehaviour
 
     void Start()
     {
-        emojies = Resources.LoadAll<Sprite>("emojis-x2-64x64");
+        _emojies = Resources.LoadAll<Sprite>("emojis-x2-64x64");
     }    
 
     public bool RequestConversation()
     {
-        requestCount++;
-        if (requestCount >= SpawnManager.Instance.registeredFigures.Count / requestThreshholdModifier)
+        _requestCount++;
+        if (_requestCount >= SpawnManager.Instance.RegisteredFigures.Count / requestThreshholdModifier)
         {
-            requestCount = 0;
+            _requestCount = 0;
             return true;
         }
         return false;
@@ -34,7 +34,7 @@ public class ConversationManager : MonoBehaviour
 
     public void ShowBubble(PlayerFigureController requester)
     {
-        requester.ShowBubble(emojies[Random.Range(0, emojies.Length)]);
+        requester.ShowBubble(_emojies[Random.Range(0, _emojies.Length)]);
         requester.Invoke(nameof(requester.HideBubble), bubbleDuration);
     }
 }

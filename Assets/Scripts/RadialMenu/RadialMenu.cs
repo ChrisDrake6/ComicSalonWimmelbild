@@ -15,6 +15,7 @@ public class RadialMenu : MonoBehaviour
     private float _stepLength;
 
     private bool _isBuilt = false;
+    private bool _mouseClickedOnce = false;
 
     int piecesCount;
 
@@ -77,14 +78,22 @@ public class RadialMenu : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
-                switch (_cakePieces[activeElementIndex].Action)
+                if (_mouseClickedOnce)
                 {
-                    case PossibleActions.Cancel:
-                        RadialMenuManager.Instance.CloseMenu();
-                        break;
-                    case PossibleActions.Leave:
-                        RadialMenuManager.Instance.ConfirmSendingSpriteAway();
-                        break;
+                    _mouseClickedOnce = false;
+                    switch (_cakePieces[activeElementIndex].Action)
+                    {
+                        case PossibleActions.Cancel:
+                            RadialMenuManager.Instance.CloseMenu();
+                            break;
+                        case PossibleActions.Leave:
+                            RadialMenuManager.Instance.ConfirmSendingSpriteAway();
+                            break;
+                    }
+                }
+                else 
+                { 
+                    _mouseClickedOnce = true; 
                 }
             }
         }

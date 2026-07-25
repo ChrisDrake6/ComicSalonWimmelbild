@@ -49,7 +49,7 @@ public class RadialMenuManager : MonoBehaviour
 
     private void Update()
     {
-        if ((radialMenu.gameObject.activeInHierarchy || confirmationDialogue.activeInHierarchy) && (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)))
+        if ((radialMenu.gameObject.activeInHierarchy || confirmationDialogue.activeInHierarchy) && (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonUp(1)))
         {
             CloseMenu(!Input.GetKeyDown(KeyCode.Escape));
         }
